@@ -1,8 +1,8 @@
 from telemetry import collector, analyzer
-import fastf1
+#import fastf1
 import os
 
-fastf1.Cache.enable_cache('cache')
+#fastf1.Cache.enable_cache('cache')
 
 
 def clear_console():
@@ -25,21 +25,17 @@ if __name__ == '__main__':
 
     try:
         int(selection)
-        match int(selection):
-            case 1:
-                print('Starting Telemetry collection...')
-                clear_console()
-                collector.receive_data()
-
-            case 2:
-                clear_console()
-                analyzer.analyze_data()
-
-            case 3:
-                print('Exit')
-
-            case _:
-                print('Invalid input, exiting program!')
+        if selection == 1:
+            print('Starting Telemetry collection...')
+            clear_console()
+            collector.receive_data()
+        elif selection == 2:
+            clear_console()
+            analyzer.analyze_data()
+        elif selection == 3:
+            print('Exit')
+        else:
+            print('Invalid input, exiting program!')
 
     except ValueError:
         print('Invalid input, exiting program!')
