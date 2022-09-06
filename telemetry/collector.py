@@ -5,7 +5,7 @@ import datetime
 
 
 def receive_data():
-    UDP_IP = '192.168.10.1'
+    UDP_IP = '85.14.247.158'
     UDP_PORT = 27001
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
