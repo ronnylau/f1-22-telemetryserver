@@ -21,13 +21,13 @@ def analyze_data():
 
         with open(f'./stored_telemetry/{selected_session_name}') as file:
             data = json.load(file)
-
+            print(data)
             #fastf1.plotting.setup_mpl()
 
             track = data['track_name']
             #session = fastf1.get_session(2022, track, 'Q')
 
-            session.load()
+            #session.load()
             #driver = session.laps.pick_driver('LEC').pick_fastest()
             #lec_car_data = driver.get_car_data()
 
