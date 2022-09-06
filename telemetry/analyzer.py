@@ -1,6 +1,6 @@
-from matplotlib import pyplot as plt
-import fastf1.plotting
-import pandas as pd
+#from matplotlib import pyplot as plt
+i#mport fastf1.plotting
+#import pandas as pd
 import os
 import json
 
@@ -22,14 +22,14 @@ def analyze_data():
         with open(f'./stored_telemetry/{selected_session_name}') as file:
             data = json.load(file)
 
-            fastf1.plotting.setup_mpl()
+            #fastf1.plotting.setup_mpl()
 
             track = data['track_name']
-            session = fastf1.get_session(2022, track, 'Q')
+            #session = fastf1.get_session(2022, track, 'Q')
 
             session.load()
-            driver = session.laps.pick_driver('LEC').pick_fastest()
-            lec_car_data = driver.get_car_data()
+            #driver = session.laps.pick_driver('LEC').pick_fastest()
+            #lec_car_data = driver.get_car_data()
 
             # Sort the laps by quickest time
             laps = data['laps']
@@ -47,24 +47,7 @@ def analyze_data():
                     pass
 
             if fastest_lap_telemetry:
-                # Setup Plot
-                fig, ax = plt.subplots()
-
-                # Plotting real fastest lap
-                tLec = lec_car_data['Time']
-                vCarLec = lec_car_data['Speed']
-                ax.plot(tLec, vCarLec, label='Real Driver Lap', color='red')
-
-                # Plotting own fastest lap
-                t = pd.Series([pd.to_timedelta(data_point['Lap Time'], 'ms') for data_point in fastest_lap_telemetry])
-                vCar = pd.Series([data_point['Speed'] for data_point in fastest_lap_telemetry])
-                ax.plot(t, vCar, label='Own Lap', color='white')
-
-                ax.set_xlabel('Time')
-                ax.set_ylabel('Speed [Km/h]')
-                ax.set_title(f'{session.event["EventName"]}, {session.name}')
-                ax.legend()
-                plt.show()
+                pass
 
             else:
                 print('No complete lap was recorded during this session')

@@ -1,4 +1,4 @@
-from telemetry import collector
+from telemetry import collector, analyzer
 #import fastf1
 import os
 
