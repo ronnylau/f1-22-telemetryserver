@@ -24,7 +24,7 @@ if __name__ == '__main__':
     selection: str = input('Enter number: ')
 
     try:
-        int(selection)
+        selection = int(selection)
         if selection == 1:
             print('Starting Telemetry collection...')
             clear_console()
