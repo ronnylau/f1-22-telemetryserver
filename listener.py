@@ -11,7 +11,7 @@ class TelemetryListener:
 
         # Set to default port used by the game in telemetry setup.
         if not port:
-            port = 27001
+            port = 20777
 
         if not host:
             host = ''
