@@ -8,6 +8,7 @@ def trackLapData(packet, racedata, carstatus):
     # print(lapdata['lap_data'])
     sessionID = getSessionID(packet)
     print(sessionID)
+    exit(1)
     if carstatus and racedata.data and racedata.data[0] and racedata.data[0]['lap_data']:
         # for
         pass
