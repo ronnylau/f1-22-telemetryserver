@@ -10,9 +10,8 @@ def trackLapHistoryData(packet, racedata, carstatus):
         carstatus = carstatus.to_dict()
     if carstatus and \
             racedata['data'] and \
-            racedata['data'][0] and \
-            racedata['data'][0]['lap_data']:
         index = 0
+        print('while')
         while index < len(lapdata):
             newBest = lapdata[index]['lap_history_data']['lap_time_in_ms']
             print(newBest)
