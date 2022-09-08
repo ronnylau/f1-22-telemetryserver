@@ -4,8 +4,8 @@ import pickle
 from pathlib import Path
 
 from packets import HEADER_FIELD_TO_PACKET_TYPE
-
 from listener import TelemetryListener
+import record
 
 
 def _get_listener():
@@ -22,14 +22,39 @@ def main():
     listener = _get_listener()
 
     try:
-        with open('json_data.json', 'a') as outfile:
-            while True:
-                packet = listener.get()
-                header = packet.get_value('header')
-                if header.get('packet_id') == 3:
-                    print('id 3 gefunden')
-                # print(json.dumps(packet.to_dict(), indent=4, sort_keys=True))
-                # json.dump(packet.to_dict(), outfile, indent=4, sort_keys=True)
+        while True:
+            packet = listener.get()
+            print('packet: ' + packet.to_json())
+            header = packet.get_value('header')
+
+            key = (header.get('packet_format'), header.get('packet_version'), header.get('packet_id'))
+            if HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketMotionData':
+                print('Track Motion Data')
+                #data = record.trackLapData(packet)
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketSessionData':
+                print('Track Session Data')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketLapData':
+                print('Track Lap Data')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketEventData':
+                print('Track Event Data')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketParticipantsData':
+                print('Track Participants Data')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarSetupData':
+                print('Track Car Setup Data')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarTelemetryData':
+                print('Track PacketCarTelemetryData')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarStatusData':
+                print('Track PacketCarStatusData')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketFinalClassificationData':
+                print('Track PacketFinalClassificationData')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketLobbyInfoData':
+                print('Track PacketLobbyInfoData')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarDamageData':
+                print('Track PacketCarDamageData')
+            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketSessionHistoryData':
+                print('Track PacketSessionHistoryData')
+
+                # json.dump(data.to_dict(), outfile, indent=4, sort_keys=True)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
