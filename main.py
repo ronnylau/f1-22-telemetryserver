@@ -33,7 +33,7 @@ def main():
     try:
         racedata = {
             'sessionID': None,
-            'data': {}
+            'data': {},
         }
         lastwrite = None
         carstatus = None
