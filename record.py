@@ -51,7 +51,7 @@ def trackLapData(packet, racedata, carstatus):
         if index in racedata['data'].keys():
 
             # try to find best lap
-            if 'bestLapTime' not in racedata['data'][index]['costom']:
+            if 'bestLapTime' not in racedata['data'][index]['costom'].keys():
                 #first lap, set to 0
                 racedata['data'][index]['costom']['bestLapTime'] = 0
 
