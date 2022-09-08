@@ -3,20 +3,14 @@ def getSessionID(data):
 
 
 def trackLapHistoryData(packet, racedata, carstatus):
+    print('begin processing laphistory data')
     lapdata = packet.to_dict()
     # print(lapdata['lap_data'])
     sessionID = getSessionID(lapdata)
     if carstatus:
         carstatus = carstatus.to_dict()
-    if carstatus and \
-            racedata['data']:
-        index = 0
-        print('while')
-        while index < len(lapdata):
-            newBest = lapdata[index]['lap_history_data']['lap_time_in_ms']
-            print(newBest)
-            exit(1)
-            ++index
+    print(lapdata)
+    exit(1)
     return racedata
 
 
