@@ -24,10 +24,11 @@ def main():
     try:
         while True:
             packet = listener.get()
-            print('packet: ' + packet.to_json())
+            #print('packet: ' + packet.to_json())
             header = packet.get_value('header')
 
             key = (header.get('packet_format'), header.get('packet_version'), header.get('packet_id'))
+            print(key)
             if HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketMotionData':
                 print('Track Motion Data')
                 #data = record.trackLapData(packet)
