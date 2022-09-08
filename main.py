@@ -29,6 +29,7 @@ def main():
 
             key = (header.get('packet_format'), header.get('packet_version'), header.get('packet_id'))
             print(key)
+            print(HEADER_FIELD_TO_PACKET_TYPE.get(key))
             if HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketMotionData':
                 print('Track Motion Data')
                 #data = record.trackLapData(packet)
