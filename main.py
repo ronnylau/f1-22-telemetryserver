@@ -32,7 +32,7 @@ def main():
             if isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketMotionData):
                 print('Track Motion Data')
                 #data = record.trackLapData(packet)
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketSessionData':
+            elif isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketSessionData):
                 print('Track Session Data')
             elif isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketLapData):
                 print('Track Lap Data')
