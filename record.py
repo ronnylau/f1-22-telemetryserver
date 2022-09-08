@@ -10,12 +10,13 @@ def trackLapHistoryData(packet, racedata, carstatus):
     if carstatus:
         carstatus = carstatus.to_dict()
     # try to find the best lap time
-    # open
     return racedata
 
 
 def trackLapData(packet, racedata, carstatus):
-
+    print('Print Lap Data Package')
+    print(packet.to_dict())
+    exit(1)
     return racedata
 def trackParticipantsData(packet, racedata):
     # update session id
