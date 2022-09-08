@@ -5,7 +5,7 @@ def getSessionID(packet):
 
 def trackLapData(packet, racedata, carstatus):
     lapdata = packet.to_dict()
-    print(lapdata)
+    print(lapdata['lap_data'])
     exit(1)
     pass
     sessionID = getSessionID(packet)
