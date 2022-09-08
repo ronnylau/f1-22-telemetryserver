@@ -1,10 +1,11 @@
 def getSessionID(packet):
-    return packet.get_value('header').m_sessionUID.toString()
+    header = packet.to_dict().header
+    return header.sessionUID.toString()
 
 
 def trackLapData(packet, racedata, carstatus):
     lapdata = packet.to_dict()
-    print(lapdata)
+    print(lapdata.lapData)
     pass
     sessionID = getSessionID(packet)
     if carstatus and racedata.data and racedata.data[0] and racedata.data[0]['lap_data']:
