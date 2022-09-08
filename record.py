@@ -9,9 +9,9 @@ def trackLapHistoryData(packet, racedata, carstatus):
     print('begin processing laphistory data')
 
     # get dict
-    lapdata = packet.to_dict()
+    # lapdata = packet.to_dict()
 
-    carIndex = lapdata['car_idx']
+    # carIndex = lapdata['car_idx']
 
 
     #try to find a new best lap
@@ -20,7 +20,7 @@ def trackLapHistoryData(packet, racedata, carstatus):
 
 
     # update session id
-    racedata['sessionID'] = getSessionID(lapdata)
+    # racedata['sessionID'] = getSessionID(lapdata)
 
 
 
