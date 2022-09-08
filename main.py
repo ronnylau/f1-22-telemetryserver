@@ -24,35 +24,30 @@ def main():
     try:
         while True:
             packet = listener.get()
-            #print('packet: ' + packet.to_json())
-            header = packet.get_value('header')
-
-            key = (header.get('packet_format'), header.get('packet_version'), header.get('packet_id'))
-            print(key)
-            if isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketMotionData):
+            if isinstance(packet, PacketMotionData):
                 print('Track Motion Data')
-                #data = record.trackLapData(packet)
-            elif isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketSessionData):
+                # data = record.trackLapData(packet)
+            elif isinstance(packet, PacketSessionData):
                 print('Track Session Data')
             elif isinstance(packet, PacketLapData):
                 print('Track Lap Data')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketEventData':
+            elif isinstance(packet, PacketEventData):
                 print('Track Event Data')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketParticipantsData':
+            elif isinstance(packet, PacketParticipantsData):
                 print('Track Participants Data')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarSetupData':
+            elif isinstance(packet, PacketCarSetupData):
                 print('Track Car Setup Data')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarTelemetryData':
+            elif isinstance(packet, PacketCarTelemetryData):
                 print('Track PacketCarTelemetryData')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarStatusData':
+            elif isinstance(packet, PacketCarStatusData):
                 print('Track PacketCarStatusData')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketFinalClassificationData':
+            elif isinstance(packet, PacketFinalClassificationData):
                 print('Track PacketFinalClassificationData')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketLobbyInfoData':
+            elif isinstance(packet, PacketLobbyInfoData):
                 print('Track PacketLobbyInfoData')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketCarDamageData':
+            elif isinstance(packet, PacketCarDamageData):
                 print('Track PacketCarDamageData')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketSessionHistoryData':
+            elif isinstance(packet, PacketSessionHistoryData):
                 print('Track PacketSessionHistoryData')
 
                 # json.dump(data.to_dict(), outfile, indent=4, sort_keys=True)
