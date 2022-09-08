@@ -56,7 +56,13 @@ def trackLapData(packet, racedata, carstatus):
                 racedata['data'][index]['costom']['bestLapTime'] = 0
 
             # check if the last lap was the fastest
-            if lap['last_lap_time_in_ms'] is not 0 and (racedata['data'][index]['costom']['bestLapTime'] > lap['last_lap_time_in_ms']):
+            if lap['last_lap_time_in_ms'] is not 0 \
+                    and (
+                                racedata['data'][index]['costom']['bestLapTime'] == 0
+                        or (
+                                racedata['data'][index]['costom']['bestLapTime'] > lap['last_lap_time_in_ms']
+                        )
+                    ):
                 #last lap was the new fastest lap for the driver
                 racedata['data'][index]['costom']['bestLapTime'] = lap['last_lap_time_in_ms']
                 racedata['data'][index]['costom']['bestLapTyre'] = carstatus['car_status_data'][index]['visual_tyre_compound']
