@@ -39,6 +39,10 @@ def trackLapData(packet, racedata, carstatus):
     racedata['sessionID'] = getSessionID(lapdata)
 
     #unpack carstatus
+    if carstatus is None:
+        # car status is not in place yet
+        return racedata
+
     carstatus = carstatus.to_dict()
 
     laps = lapdata['lap_data']
