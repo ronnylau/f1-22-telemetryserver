@@ -10,19 +10,22 @@ def trackLapHistoryData(packet, racedata, carstatus):
     if carstatus:
         carstatus = carstatus.to_dict()
     # try to find the best lap time
-    try:
-        if lapdata['best_lap_time_lap_num'] and lapdata['best_lap_time_lap_num'] > 0:
-            print(lapdata['lap_history_data'][lapdata.best_lap_time_lap_num-1]['lap_time_in_ms'])
-            exit(1)
-    except():
-        print(lapdata)
-        exit(1)
+    # open
     return racedata
 
 
 def trackLapData(packet, racedata, carstatus):
     return racedata
 def trackParticipantsData(packet, racedata):
+    # update session id
+    participantsdata = packet.to_dict
+    racedata['sessionID'] = getSessionID(participantsdata)
+
+    #get participants
+    participants = participantsdata['participants']
+    for driver in participants:
+        print(driver)
+    exit(1)
     return racedata
 
 
