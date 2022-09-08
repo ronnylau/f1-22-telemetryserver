@@ -41,21 +41,21 @@ def main():
         while True:
             packet = listener.get()
             if isinstance(packet, PacketMotionData):
-                print('Track Motion Data')
+                pass
             elif isinstance(packet, PacketSessionData):
-                print('Track Session Data')
+                pass
             elif isinstance(packet, PacketLapData):
                 print('Track Lap Data')
                 racedata = record.trackLapData(packet, racedata, carstatus)
             elif isinstance(packet, PacketEventData):
-                print('Track Event Data')
+                pass
             elif isinstance(packet, PacketParticipantsData):
                 print('Track Participants Data')
                 racedata = record.trackParticipantsData(packet, racedata)
             elif isinstance(packet, PacketCarSetupData):
-                print('Track Car Setup Data')
+                pass
             elif isinstance(packet, PacketCarTelemetryData):
-                print('Track PacketCarTelemetryData')
+                pass
             elif isinstance(packet, PacketCarStatusData):
                 print('Track PacketCarStatusData')
                 carstatus = packet
@@ -66,11 +66,11 @@ def main():
                 print('Session complete')
                 # reset data
             elif isinstance(packet, PacketLobbyInfoData):
-                print('Track PacketLobbyInfoData')
+                pass
             elif isinstance(packet, PacketCarDamageData):
-                print('Track PacketCarDamageData')
+                pass
             elif isinstance(packet, PacketSessionHistoryData):
-                print('Track PacketSessionHistoryData')
+                pass
 
                 # json.dump(data.to_dict(), outfile, indent=4, sort_keys=True)
     except KeyboardInterrupt:
