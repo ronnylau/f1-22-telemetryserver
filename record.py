@@ -10,7 +10,7 @@ def trackLapHistoryData(packet, racedata, carstatus):
     if carstatus:
         carstatus = carstatus.to_dict()
     # try to find the best lap time
-    if lapdata.best_lap_time_lap_num > 0:
+    if lapdata['best_lap_time_lap_num'] > 0:
         print(lapdata['lap_history_data'][lapdata.best_lap_time_lap_num-1]['lap_time_in_ms'])
         exit(1)
     return racedata
