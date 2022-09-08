@@ -15,6 +15,7 @@ def trackLapHistoryData(packet, racedata, carstatus):
 
 
 def trackLapData(packet, racedata, carstatus):
+
     return racedata
 def trackParticipantsData(packet, racedata):
     # update session id
@@ -24,11 +25,13 @@ def trackParticipantsData(packet, racedata):
     #get participants
     participants = participantsdata['participants']
     for index, driver in enumerate(participants):
-        racedata['data'][index] = {}
-        newdriver = {'driver': driver}
-        racedata['data'][index].update(newdriver)
-    print(racedata)
-    exit(1)
+        #check for existing key
+        if index not in racedata['data'].keys():
+            # add new index
+            racedata['data'][index] = {}
+            newdriver = {'driver': driver}
+            # update dict with new driver
+            racedata['data'][index].update(newdriver)
     return racedata
 
 
