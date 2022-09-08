@@ -1,5 +1,5 @@
-def trackLapData(packet):
-    return packet
+def trackLapData(packet, racedata, carstatus):
+    return racedata
 
 
 def trackParticipantsData(packet, racedata):
