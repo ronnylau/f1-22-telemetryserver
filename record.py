@@ -1,5 +1,5 @@
 def getSessionID(data):
-    return data['header']['session_uid'].toString()
+    return str(data['header']['session_uid'])
 
 
 def trackLapData(packet, racedata, carstatus):
