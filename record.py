@@ -23,10 +23,8 @@ def trackParticipantsData(packet, racedata):
 
     #get participants
     participants = participantsdata['participants']
-    index = 0
-    for driver in participants:
+    for index, driver in enumerate(participants):
         racedata['data'][index] = driver
-        ++index
     print(racedata)
     exit(1)
     return racedata
