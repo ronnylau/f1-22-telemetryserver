@@ -6,32 +6,10 @@ def getSessionID(data):
 
 
 def trackLapHistoryData(packet, racedata, carstatus):
-    print('begin processing laphistory data')
-
-    # get dict
-    # lapdata = packet.to_dict()
-
-    # carIndex = lapdata['car_idx']
-
-
-    #try to find a new best lap
-
-    #current best lap
-
-
-    # update session id
-    # racedata['sessionID'] = getSessionID(lapdata)
-
-
-
-
     return racedata
 
 
 def trackLapData(packet, racedata, carstatus):
-    # print('Print Lap Data Package')
-    # print(json.dumps(packet.to_dict(), sort_keys=True, indent=4))
-
     #get dict
     lapdata = packet.to_dict()
 
@@ -92,4 +70,12 @@ def trackParticipantsData(packet, racedata):
 
 
 def trackFinalClassification(packet, racedata):
+    finalracedata = packet.to_dict()
+
+    racedata['sessionID'] = getSessionID(finalracedata)
+
+    racedetails = finalracedata['classification_data']
+    for index, detail in enumerate(racedetails):
+        newdetail = {'race_data': detail}
+        racedata['data'][index].update(newdetail)
     return racedata
