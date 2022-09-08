@@ -1,3 +1,6 @@
+import json
+
+
 def getSessionID(data):
     return str(data['header']['session_uid'])
 
@@ -15,7 +18,7 @@ def trackLapHistoryData(packet, racedata, carstatus):
 
 def trackLapData(packet, racedata, carstatus):
     print('Print Lap Data Package')
-    print(packet.to_dict())
+    print(json.dumps(packet.to_dict(), sort_keys=True, indent=4))
     exit(1)
     return racedata
 def trackParticipantsData(packet, racedata):
