@@ -17,9 +17,20 @@ def trackLapHistoryData(packet, racedata, carstatus):
 
 
 def trackLapData(packet, racedata, carstatus):
-    print('Print Lap Data Package')
-    print(json.dumps(packet.to_dict(), sort_keys=True, indent=4))
-    exit(1)
+    # print('Print Lap Data Package')
+    # print(json.dumps(packet.to_dict(), sort_keys=True, indent=4))
+
+    #get dict
+    lapdata = packet.to_dict()
+
+    # update session id
+    racedata['sessionID'] = getSessionID(lapdata)
+
+    laps = lapdata['lap_data']
+    for index, lap in enumerate(laps):
+        if index in racedata['data'].keys():
+            newlap = {'lap_data': lap}
+            racedata['data'][index].update(newlap)
     return racedata
 def trackParticipantsData(packet, racedata):
     # update session id
