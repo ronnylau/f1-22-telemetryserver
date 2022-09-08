@@ -64,7 +64,13 @@ def main():
                 racedata = record.trackFinalClassification(packet, racedata)
                 # write data
                 print('Session complete')
+                print(racedata)
+                exit(1)
                 # reset data
+                racedata = {
+                    'sessionID': None,
+                    'data': {},
+                }
             elif isinstance(packet, PacketLobbyInfoData):
                 pass
             elif isinstance(packet, PacketCarDamageData):
