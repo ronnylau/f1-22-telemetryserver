@@ -23,7 +23,7 @@ lastwrite = 0
 def writefile(racedata, force=0):
     global lastwrite
     config = getconfig()
-    print('force='+ force)
+    print('force='+ str(force))
     if racedata and (force or (time.time() - lastwrite) > config['write-frequency']):
         filename = config['prefix'] + 'racedata_' + racedata['sessionID']
         dir = config['path']
