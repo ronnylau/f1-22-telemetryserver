@@ -9,7 +9,7 @@ def trackLapHistoryData(packet, racedata, carstatus):
     if carstatus:
         carstatus = carstatus.to_dict()
     if carstatus and \
-            racedata['data'] and \
+            racedata['data']:
         index = 0
         print('while')
         while index < len(lapdata):
