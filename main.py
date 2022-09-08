@@ -6,15 +6,29 @@ from pathlib import Path
 from packets import *
 from listener import TelemetryListener
 import record
-
+import time
 
 def getconfig():
     config = {
         'path': '.',
-        'write-frequency': 2500,
+        'write-frequency': 5,
         'prefix': '',
     }
     return config
+
+lastwrite = 0
+
+
+def writefile(racedata, force=0):
+    config = getconfig()
+    if racedata and (force or (time.time() - lastwrite) > config['write-frequency']):
+        print(f'Write data to file {path}/{prefix}racedata.json')
+        with open('./test.json', 'w') as f:
+            json.dump(racedata, f, indent=4, sort_keys=True)
+    print('Job done!')
+
+
+
 
 
 def _get_listener():
@@ -47,11 +61,13 @@ def main():
             elif isinstance(packet, PacketLapData):
                 print('Track Lap Data')
                 racedata = record.trackLapData(packet, racedata, carstatus)
+                writefile(racedata)
             elif isinstance(packet, PacketEventData):
                 pass
             elif isinstance(packet, PacketParticipantsData):
                 print('Track Participants Data')
                 racedata = record.trackParticipantsData(packet, racedata)
+                writefile(racedata)
             elif isinstance(packet, PacketCarSetupData):
                 pass
             elif isinstance(packet, PacketCarTelemetryData):
@@ -64,8 +80,7 @@ def main():
                 racedata = record.trackFinalClassification(packet, racedata)
                 # write data
                 print('Session complete')
-                print(racedata)
-                exit(1)
+                writefile(racedata, force=1)
                 # reset data
                 racedata = {
                     'sessionID': None,
