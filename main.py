@@ -3,7 +3,7 @@ import json
 import pickle
 from pathlib import Path
 
-from packets import HEADER_FIELD_TO_PACKET_TYPE
+from packets import *
 from listener import TelemetryListener
 import record
 
@@ -29,13 +29,12 @@ def main():
 
             key = (header.get('packet_format'), header.get('packet_version'), header.get('packet_id'))
             print(key)
-            print(HEADER_FIELD_TO_PACKET_TYPE.get(key))
-            if HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketMotionData':
+            if isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketMotionData):
                 print('Track Motion Data')
                 #data = record.trackLapData(packet)
             elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketSessionData':
                 print('Track Session Data')
-            elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketLapData':
+            elif isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketLapData):
                 print('Track Lap Data')
             elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketEventData':
                 print('Track Event Data')
