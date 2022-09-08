@@ -26,7 +26,7 @@ def main():
             while True:
                 packet = listener.get()
                 header = packet.get_value('header')
-                if header.getValue('packet_id') == 3:
+                if header.get('packet_id') == 3:
                     print('id 3 gefunden')
                 # print(json.dumps(packet.to_dict(), indent=4, sort_keys=True))
                 # json.dump(packet.to_dict(), outfile, indent=4, sort_keys=True)
