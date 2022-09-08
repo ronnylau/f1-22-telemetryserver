@@ -6,7 +6,8 @@ def trackLapHistoryData(packet, racedata, carstatus):
     lapdata = packet.to_dict()
     # print(lapdata['lap_data'])
     sessionID = getSessionID(lapdata)
-    carstatus = carstatus.to_dict()
+    if carstatus:
+        carstatus = carstatus.to_dict()
     if carstatus and racedata.data and racedata.data[0] and racedata.data[0]['lap_data']:
         index = 0
         while index < len(lapdata):
