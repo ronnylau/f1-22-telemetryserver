@@ -22,7 +22,7 @@ def trackLapHistoryData(packet, racedata, carstatus):
 
 
 def trackLapData(packet, racedata, carstatus):
-    pass
+    return racedata
 def trackParticipantsData(packet, racedata):
     return racedata
 
