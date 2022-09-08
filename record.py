@@ -71,8 +71,6 @@ def trackParticipantsData(packet, racedata):
 
 def trackFinalClassification(packet, racedata):
     finalracedata = packet.to_dict()
-    print(finalracedata)
-    exit(1)
 
     racedata['sessionID'] = getSessionID(finalracedata)
 

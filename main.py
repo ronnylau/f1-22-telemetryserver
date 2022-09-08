@@ -23,11 +23,13 @@ lastwrite = 0
 def writefile(racedata, force=0):
     global lastwrite
     config = getconfig()
+    print(f'force={force}')
     if racedata and (force or (time.time() - lastwrite) > config['write-frequency']):
         filename = config['prefix'] + 'racedata_' + racedata['sessionID']
         dir = config['path']
         path  = os.path.join(dir, filename)
         print(f'Write data to file {path}')
+        print(force)
         with open(path, 'w') as f:
             json.dump(racedata, f, indent=4, sort_keys=True)
         print('Job done!')
