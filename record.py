@@ -18,7 +18,7 @@ def trackLapData(packet, racedata, carstatus):
     return racedata
 def trackParticipantsData(packet, racedata):
     # update session id
-    participantsdata = packet.to_dict
+    participantsdata = packet.to_dict()
     racedata['sessionID'] = getSessionID(participantsdata)
 
     #get participants
