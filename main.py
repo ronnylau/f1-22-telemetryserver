@@ -34,7 +34,7 @@ def main():
                 #data = record.trackLapData(packet)
             elif isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketSessionData):
                 print('Track Session Data')
-            elif isinstance(HEADER_FIELD_TO_PACKET_TYPE[key], PacketLapData):
+            elif isinstance(packet, PacketLapData):
                 print('Track Lap Data')
             elif HEADER_FIELD_TO_PACKET_TYPE[key] == 'PacketEventData':
                 print('Track Event Data')
