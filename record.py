@@ -25,7 +25,7 @@ def trackParticipantsData(packet, racedata):
     participants = participantsdata['participants']
     index = 0
     for driver in participants:
-        racedata['data'][index].append(driver)
+        racedata['data'][index] = driver
         ++index
     print(racedata)
     exit(1)
