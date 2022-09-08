@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 import pickle
 from pathlib import Path
 
@@ -22,8 +23,11 @@ lastwrite = 0
 def writefile(racedata, force=0):
     config = getconfig()
     if racedata and (force or (time.time() - lastwrite) > config['write-frequency']):
-        print(f'Write data to file {path}/{prefix}racedata.json')
-        with open('./test.json', 'w') as f:
+        filename = config['prefix'] + 'racedata_' + racedata['sessionID']
+        dir = config['path']
+        path  = os.path.join(dir,filename)
+        print(f'Write data to file {path}')
+        with open(path, 'w') as f:
             json.dump(racedata, f, indent=4, sort_keys=True)
     print('Job done!')
 
