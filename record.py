@@ -24,7 +24,7 @@ def trackParticipantsData(packet, racedata):
     #get participants
     participants = participantsdata['participants']
     for index, driver in enumerate(participants):
-        racedata['data'][index] = driver
+        racedata['data'][index]['driver'] = driver
     print(racedata)
     exit(1)
     return racedata
