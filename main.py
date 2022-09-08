@@ -70,7 +70,8 @@ def main():
             elif isinstance(packet, PacketCarDamageData):
                 pass
             elif isinstance(packet, PacketSessionHistoryData):
-                pass
+                print('Track Lap History Data')
+                racedata = record.trackLapHistoryData(packet, racedata, carstatus)
 
                 # json.dump(data.to_dict(), outfile, indent=4, sort_keys=True)
     except KeyboardInterrupt:
