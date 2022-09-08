@@ -25,9 +25,11 @@ def main():
         with open('json_data.json', 'a') as outfile:
             while True:
                 packet = listener.get()
-                print(packet.get_value('header'))
-                #print(json.dumps(packet.to_dict(), indent=4, sort_keys=True))
-                #json.dump(packet.to_dict(), outfile, indent=4, sort_keys=True)
+                header = packet.get_value('header')
+                if header.getValue('packet_id') == 3:
+                    print('id 3 gefunden')
+                # print(json.dumps(packet.to_dict(), indent=4, sort_keys=True))
+                # json.dump(packet.to_dict(), outfile, indent=4, sort_keys=True)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
