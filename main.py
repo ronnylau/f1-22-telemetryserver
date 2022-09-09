@@ -18,7 +18,7 @@ def getconfig():
     return config
 
 lastwrite = 0
-
+sessionID = None
 
 def writefile(racedata, force=0):
     global lastwrite
@@ -67,7 +67,7 @@ def main():
                 racedata = record.trackLapData(packet, racedata, carstatus)
                 writefile(racedata)
             elif isinstance(packet, PacketEventData):
-                pass
+                print(packet)
             elif isinstance(packet, PacketParticipantsData):
                 racedata = record.trackParticipantsData(packet, racedata)
                 writefile(racedata)
@@ -84,18 +84,18 @@ def main():
                 print('Session complete')
                 writefile(racedata, force=1)
                 # reset data
-                racedata = {
-                    'sessionID': None,
-                    'data': {},
-                }
+                if (racedata['sessionID'] != sessionID):
+                    racedata = {
+                        'sessionID': None,
+                        'data': {},
+                    }
+                sessionID = racedata['sessionID']
             elif isinstance(packet, PacketLobbyInfoData):
                 pass
             elif isinstance(packet, PacketCarDamageData):
                 pass
             elif isinstance(packet, PacketSessionHistoryData):
                 racedata = record.trackLapHistoryData(packet, racedata, carstatus)
-
-                # json.dump(data.to_dict(), outfile, indent=4, sort_keys=True)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
