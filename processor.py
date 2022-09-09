@@ -19,7 +19,7 @@ directory = config['path']
 pathstr = os.path.join(directory, filename)
 path = Path(pathstr)
 print(path.is_file())
-print(path)
+print(pathstr)
 
 contents = json.loads(pathstr)
 
