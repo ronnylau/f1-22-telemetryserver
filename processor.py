@@ -19,8 +19,9 @@ directory = config['path']
 pathstr = os.path.join(directory, filename)
 path = Path(pathstr)
 print(path.is_file())
+print(path)
 
-with open(path) as json_file:
+with open(path, 'r') as json_file:
     racedata = json.load(json_file)
     print(racedata)
 
