@@ -31,7 +31,7 @@ def writefile(racedata, force=0):
         print(f'Write data to file {path}')
         print(force)
         with open(path, 'w') as f:
-            json.dump(racedata, f, indent=4, sort_keys=True)
+            to_json(racedata)
         print('Job done!')
         lastwrite = time.time()
 
