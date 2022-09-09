@@ -21,7 +21,7 @@ path = Path(pathstr)
 print(path.is_file())
 print(path)
 
-with open(path, 'r') as json_file:
+with open(pathstr, 'r') as json_file:
     racedata = json.load(json_file)
     print(racedata)
 
