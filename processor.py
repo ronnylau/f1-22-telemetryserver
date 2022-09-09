@@ -26,7 +26,7 @@ with open(pathstr, "r") as read_file:
 print(type(racedata))
 
 for (key, value) in racedata['data'].items():
-    print('Key ' + key + ': Item ' + str(value))
+    print(key)
 exit(1)
 
 # remove padding items
