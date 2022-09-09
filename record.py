@@ -10,13 +10,13 @@ def trackLapHistoryData(packet, racedata, carstatus):
 
 
 def trackLapData(packet, racedata, carstatus):
-    #get dict
+    # get dict
     lapdata = packet.to_dict()
 
     # update session id
     racedata['sessionID'] = getSessionID(lapdata)
 
-    #unpack carstatus
+    # unpack carstatus
     if carstatus is None:
         # car status is not in place yet
         return racedata
@@ -30,21 +30,23 @@ def trackLapData(packet, racedata, carstatus):
 
             # try to find best lap
             if 'bestLapTime' not in racedata['data'][index]['costom'].keys():
-                #first lap, set to 0
+                # first lap, set to 0
                 racedata['data'][index]['costom']['bestLapTime'] = 0
 
             # check if the last lap was the fastest
             if lap['last_lap_time_in_ms'] is not 0 \
                     and (
-                                racedata['data'][index]['costom']['bestLapTime'] == 0
-                        or (
-                                racedata['data'][index]['costom']['bestLapTime'] > lap['last_lap_time_in_ms']
-                        )
-                    ):
-                #last lap was the new fastest lap for the driver
+                    racedata['data'][index]['costom']['bestLapTime'] == 0
+                    or (
+                            racedata['data'][index]['costom']['bestLapTime'] > lap['last_lap_time_in_ms']
+                    )
+            ):
+                # last lap was the new fastest lap for the driver
                 racedata['data'][index]['costom']['bestLapTime'] = lap['last_lap_time_in_ms']
-                racedata['data'][index]['costom']['bestLapTyre'] = carstatus['car_status_data'][index]['visual_tyre_compound']
-                racedata['data'][index]['costom']['bestLapTyreAge'] = carstatus['car_status_data'][index]['tyres_age_laps']
+                racedata['data'][index]['costom']['bestLapTyre'] = carstatus['car_status_data'][index][
+                    'visual_tyre_compound']
+                racedata['data'][index]['costom']['bestLapTyreAge'] = carstatus['car_status_data'][index][
+                    'tyres_age_laps']
 
             newlap = {'lap_data': lap}
             racedata['data'][index].update(newlap)
@@ -56,13 +58,13 @@ def trackParticipantsData(packet, racedata):
     participantsdata = packet.to_dict()
     racedata['sessionID'] = getSessionID(participantsdata)
 
-    #get participants
+    # get participants
     participants = participantsdata['participants']
     for index, driver in enumerate(participants):
-        #check for existing key
+        # check for existing key
         if index not in racedata['data'].keys():
             # add new index
-            racedata['data'][index] = {'costom' : {}}
+            racedata['data'][index] = {'costom': {}}
             newdriver = {'driver': driver}
             # update dict with new driver
             racedata['data'][index].update(newdriver)

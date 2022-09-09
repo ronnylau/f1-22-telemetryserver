@@ -23,20 +23,17 @@ lastwrite = 0
 def writefile(racedata, force=0):
     global lastwrite
     config = getconfig()
-    print('force='+ str(force))
-    if racedata and (force or (time.time() - lastwrite) > config['write-frequency']):
+    print('force=' + str(force))
+    if racedata and (force or ((time.time() - lastwrite) > config['write-frequency'])):
         filename = config['prefix'] + 'racedata_' + racedata['sessionID']
-        dir = config['path']
-        path  = os.path.join(dir, filename)
+        directory = config['path']
+        path = os.path.join(directory, filename)
         print(f'Write data to file {path}')
         print(force)
         with open(path, 'w') as f:
             json.dump(racedata, f, indent=4, sort_keys=True)
         print('Job done!')
         lastwrite = time.time()
-
-
-
 
 
 def _get_listener():
@@ -67,13 +64,11 @@ def main():
             elif isinstance(packet, PacketSessionData):
                 pass
             elif isinstance(packet, PacketLapData):
-                print('Track Lap Data')
                 racedata = record.trackLapData(packet, racedata, carstatus)
                 writefile(racedata)
             elif isinstance(packet, PacketEventData):
                 pass
             elif isinstance(packet, PacketParticipantsData):
-                print('Track Participants Data')
                 racedata = record.trackParticipantsData(packet, racedata)
                 writefile(racedata)
             elif isinstance(packet, PacketCarSetupData):
@@ -81,7 +76,6 @@ def main():
             elif isinstance(packet, PacketCarTelemetryData):
                 pass
             elif isinstance(packet, PacketCarStatusData):
-                print('Track PacketCarStatusData')
                 carstatus = packet
             elif isinstance(packet, PacketFinalClassificationData):
                 print('Track PacketFinalClassificationData')
@@ -99,7 +93,6 @@ def main():
             elif isinstance(packet, PacketCarDamageData):
                 pass
             elif isinstance(packet, PacketSessionHistoryData):
-                print('Track Lap History Data')
                 racedata = record.trackLapHistoryData(packet, racedata, carstatus)
 
                 # json.dump(data.to_dict(), outfile, indent=4, sort_keys=True)
