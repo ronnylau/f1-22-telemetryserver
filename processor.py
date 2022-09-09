@@ -29,7 +29,6 @@ print(racedata['data'])
 # if race_data.m_position < 0 hold the item
 deletekeys = list()
 for index, item in enumerate(racedata['data']):
-    print(index)
     print(racedata['data']['0'])
     if racedata['data'][index]['race_data']['position'] == 0:
         deletekeys.append(index)
