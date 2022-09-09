@@ -28,6 +28,7 @@ with open(pathstr, "r") as read_file:
 # if race_data.m_position < 0 hold the item
 deletekeys = list()
 for index, item in enumerate(racedata['data']):
-    if racedata['data'][index]['race_data']['position'] == 0:
-        deletekeys.append(index)
+    print(index)
+    # if racedata['data'][index]['race_data']['position'] == 0:
+     #   deletekeys.append(index)
 print(deletekeys)
