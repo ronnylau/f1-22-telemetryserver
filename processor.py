@@ -14,7 +14,7 @@ def getconfig():
 
 
 config = getconfig()
-filename = sys.argv[0]
+filename = sys.argv[1]
 directory = config['path']
 pathstr = os.path.join(directory, filename)
 path = Path(pathstr)
