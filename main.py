@@ -25,7 +25,7 @@ def writefile(racedata, force=0):
     config = getconfig()
     print('force=' + str(force))
     if racedata and (force or ((time.time() - lastwrite) > config['write-frequency'])):
-        filename = config['prefix'] + 'racedata_' + racedata['sessionID']
+        filename = config['prefix'] + 'racedata_' + racedata['sessionID'] + '.json'
         directory = config['path']
         path = os.path.join(directory, filename)
         print(f'Write data to file {path}')
