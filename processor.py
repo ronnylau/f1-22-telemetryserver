@@ -22,8 +22,7 @@ print(path.is_file())
 print(path)
 
 with open(pathstr, 'r') as json_file:
-    racedata = json.load(json_file)
-    print(racedata)
+    racedata = json.loads(json_file.read())
 
     # remove padding items
     # if race_data.m_position < 0 hold the item
