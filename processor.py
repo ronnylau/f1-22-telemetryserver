@@ -14,7 +14,8 @@ def getconfig():
 config = getconfig()
 filename = sys.argv[0]
 directory = config['path']
-path = os.path.join(directory, filename)
+pathstr = os.path.join(directory, filename)
+path = Path(pathstr)
 print(path.is_file())
 
 with open(path) as json_file:
