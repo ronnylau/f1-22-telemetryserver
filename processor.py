@@ -21,7 +21,8 @@ path = Path(pathstr)
 print(path.is_file())
 print(pathstr)
 
-contents = json.loads(pathstr)
+with open(pathstr, "r") as read_file:
+    racedata = json.load(read_file)
 
 # remove padding items
 # if race_data.m_position < 0 hold the item
@@ -30,5 +31,3 @@ for index, item in enumerate(racedata['data']):
     if racedata['data'][index]['race_data']['position'] == 0:
         deletekeys.append(index)
 print(deletekeys)
-
-
