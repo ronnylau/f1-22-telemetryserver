@@ -24,8 +24,11 @@ print(pathstr)
 with open(pathstr, "r") as read_file:
     racedata = json.load(read_file)
 print(type(racedata))
+
+for (key, value) in racedata['data'].items():
+    print('Key ' + key + ': Item ' + value)
 exit(1)
-print(racedata['data'])
+
 # remove padding items
 # if race_data.m_position < 0 hold the item
 deletekeys = list()
