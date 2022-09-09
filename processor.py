@@ -30,7 +30,7 @@ print(racedata['data'])
 deletekeys = list()
 for index, item in enumerate(racedata['data']):
     print(index)
-    print(racedata['data'][index]['race_data']['position'])
+    print(racedata['data'][index])
     if racedata['data'][index]['race_data']['position'] == 0:
         deletekeys.append(index)
 print(deletekeys)
