@@ -9,6 +9,7 @@ from listener import TelemetryListener
 import record
 import time
 
+
 def getconfig():
     config = {
         'path': '.',
@@ -17,8 +18,10 @@ def getconfig():
     }
     return config
 
+
 lastwrite = 0
 sessionID = None
+
 
 def writefile(racedata, force=0):
     global lastwrite
@@ -46,6 +49,11 @@ def _get_listener():
         exit(127)
 
 
+def getEvent(eventStringCode):
+    eventCode = chr(eventStringCode[0]) + chr(eventStringCode[1]) + chr(eventStringCode[2]) + chr(eventStringCode[3])
+    return eventCode
+
+
 def main():
     global sessionID
     listener = _get_listener()
@@ -60,23 +68,35 @@ def main():
         with open('packets.log', 'w') as log:
             while True:
                 packet = listener.get()
+
+                packetdata = packet.to_dict()
+
+                # skip packets without session_uid
+                if packetdata['session_uid'] == 0:
+                    pass
+
                 if isinstance(packet, PacketMotionData):
+                    # skip motion packets
                     pass
                 elif isinstance(packet, PacketSessionData):
                     log.write('\nPacketSessionData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketLapData):
-                    racedata = record.trackLapData(packet, racedata, carstatus)
-                    writefile(racedata)
+                    # racedata = record.trackLapData(packet, racedata, carstatus)
+                    # writefile(racedata)
 
                     log.write('\nPacketLapData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketEventData):
                     log.write('\nPacketEventData\n')
                     json.dump(packet.to_dict(), log)
+
+                    event = getEvent(packet.event_string_code)
+                    print(event)
+
                 elif isinstance(packet, PacketParticipantsData):
-                    racedata = record.trackParticipantsData(packet, racedata)
-                    writefile(racedata)
+                    # racedata = record.trackParticipantsData(packet, racedata)
+                    # writefile(racedata)
                     log.write('\nPacketParticipantsData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketCarSetupData):
@@ -91,18 +111,18 @@ def main():
                     log.write('\nPacketCarStatusData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketFinalClassificationData):
-                    print('Track PacketFinalClassificationData')
-                    racedata = record.trackFinalClassification(packet, racedata)
+                    # print('Track PacketFinalClassificationData')
+                    # racedata = record.trackFinalClassification(packet, racedata)
                     # write data
-                    print('Session complete')
-                    writefile(racedata, force=1)
+                    # print('Session complete')
+                    # writefile(racedata, force=1)
                     # reset data
-                    if (racedata['sessionID'] != sessionID):
+                    """if (racedata['sessionID'] != sessionID):
                         racedata = {
                             'sessionID': None,
                             'data': {},
-                        }
-                    sessionID = racedata['sessionID']
+                        }"""
+                    # sessionID = racedata['sessionID']
 
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
@@ -113,7 +133,7 @@ def main():
                     log.write('\nPacketCarDamageData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketSessionHistoryData):
-                    racedata = record.trackLapHistoryData(packet, racedata, carstatus)
+                    # racedata = record.trackLapHistoryData(packet, racedata, carstatus)
                     log.write('\nPacketSessionHistoryData\n')
                     json.dump(packet.to_dict(), log)
     except KeyboardInterrupt:
