@@ -1,4 +1,4 @@
-import Participants
+from participants import Participants
 
 
 class Session:

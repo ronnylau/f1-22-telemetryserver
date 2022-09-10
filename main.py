@@ -1,6 +1,6 @@
 import os
 
-import Session
+from session import Session
 
 from packets import *
 from listener import TelemetryListener
