@@ -61,7 +61,6 @@ def main():
         }
         lastwrite = None
         carstatus = None
-        session = None
         with open('packets.log', 'w') as log:
             while True:
                 # get the current packet
@@ -82,10 +81,10 @@ def main():
                     # check if the session exist
                     if session and isinstance(session, Gamesession):
                         # update session
-                        session = Gamesession.update(packet=packetdata)
+                        session = Gamesession.update(packetdata)
                     else:
                         session = Gamesession()
-                        session.update(packet=packetdata)
+                        session.update(packetdata)
                     print('Session init')
                     print(session.toJSON())
                 elif isinstance(packet, PacketLapData):
@@ -194,7 +193,6 @@ def main():
                     log.write('\nPacketSessionHistoryData\n')
                     json.dump(packet.to_dict(), log)
 
-                print(session)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')

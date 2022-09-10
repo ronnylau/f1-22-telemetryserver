@@ -15,19 +15,11 @@ class Gamesession:
     formula = 0
     network_game = 0
 
-    def __int__(self, packet):
+    def __init__(self):
         self.event = None
         self.participants = Participants()
         self.classification = None
         self.lobbyinfo = None
-
-        # infomations
-        self.total_laps = packet['total_laps']
-        self.track_length = packet['track_length']
-        self.session_type = packet['session_type']
-        self.track_id = packet['track_id']
-        self.formula = packet['formula']
-        self.network_game = packet['network_game']
 
     def update(self, packet):
         self.total_laps = packet['total_laps']
