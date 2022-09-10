@@ -82,10 +82,9 @@ def main():
                     # check if the session exist
                     if session and isinstance(session, Session):
                         # update session
-                        session = Gamesession.update(packet)
+                        session = Gamesession.update(packetdata)
                     else:
-                        session = Gamesession()
-                        session.update(packet)
+                        session = Gamesession(packetdata)
                 elif isinstance(packet, PacketLapData):
                     # racedata = record.trackLapData(packet, racedata, carstatus)
                     # writefile(racedata)
