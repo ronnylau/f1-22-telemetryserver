@@ -57,7 +57,7 @@ def main():
         }
         lastwrite = None
         carstatus = None
-        with open('packets.log', 'a') as log:
+        with open('packets.log', 'w') as log:
             while True:
                 packet = listener.get()
                 if isinstance(packet, PacketMotionData):
