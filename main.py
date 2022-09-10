@@ -84,7 +84,7 @@ def main():
                         # update session
                         session = Session.update(packet)
                     else:
-                        session = Session(packet)
+                        session = Session(packet=packet)
                 elif isinstance(packet, PacketLapData):
                     # racedata = record.trackLapData(packet, racedata, carstatus)
                     # writefile(racedata)
