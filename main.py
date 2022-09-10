@@ -72,7 +72,7 @@ def main():
                 packetdata = packet.to_dict()
 
                 # skip packets without session_uid
-                if packetdata['session_uid'] == 0:
+                if packetdata['sessionID'] == 0:
                     pass
 
                 if isinstance(packet, PacketMotionData):
