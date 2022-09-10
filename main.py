@@ -4,6 +4,8 @@ import os
 import pickle
 from pathlib import Path
 
+from data import Session
+
 from packets import *
 from listener import TelemetryListener
 import record
@@ -55,7 +57,6 @@ def getEvent(eventStringCode):
 
 
 def main():
-    global sessionID
     listener = _get_listener()
 
     try:
@@ -67,13 +68,13 @@ def main():
         carstatus = None
         with open('packets.log', 'w') as log:
             while True:
+                # get the current packet
                 packet = listener.get()
-
                 packetdata = packet.to_dict()
-
+                sessionID = packetdata['header']['session_uid']
                 # skip packets without session_uid
-                if packetdata['header']['session_uid'] == 0:
-                    pass
+                if sessionID == 0:
+                    continue
 
                 if isinstance(packet, PacketMotionData):
                     # skip motion packets
@@ -81,6 +82,13 @@ def main():
                 elif isinstance(packet, PacketSessionData):
                     log.write('\nPacketSessionData\n')
                     json.dump(packet.to_dict(), log)
+
+                    # check if the session exist
+                    if isinstance(session, Session):
+                        # update session
+                        session = Session.update(packet)
+                    else:
+                        session = Session(packet)
                 elif isinstance(packet, PacketLapData):
                     # racedata = record.trackLapData(packet, racedata, carstatus)
                     # writefile(racedata)
@@ -144,8 +152,6 @@ def main():
                     elif event == "BUTN":
                         # a button status has been changed
                         pass
-
-
                 elif isinstance(packet, PacketParticipantsData):
                     # racedata = record.trackParticipantsData(packet, racedata)
                     # writefile(racedata)
