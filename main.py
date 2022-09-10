@@ -84,7 +84,7 @@ def main():
                         # update session
                         session = Gamesession.update(packetdata)
                     else:
-                        session = Gamesession(packetdata)
+                        session = Gamesession().update(packetdata)
                 elif isinstance(packet, PacketLapData):
                     # racedata = record.trackLapData(packet, racedata, carstatus)
                     # writefile(racedata)
