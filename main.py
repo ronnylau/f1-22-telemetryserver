@@ -1,6 +1,6 @@
 import os
 
-from session import Session
+from session import Gamesession
 
 from packets import *
 from listener import TelemetryListener
@@ -82,9 +82,9 @@ def main():
                     # check if the session exist
                     if session and isinstance(session, Session):
                         # update session
-                        session = Session.update(packet)
+                        session = Gamesession.update(packet)
                     else:
-                        session = Session(packet=packet)
+                        session = Gamesession(packet=packet)
                 elif isinstance(packet, PacketLapData):
                     # racedata = record.trackLapData(packet, racedata, carstatus)
                     # writefile(racedata)

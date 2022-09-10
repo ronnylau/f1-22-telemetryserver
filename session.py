@@ -1,7 +1,7 @@
 from participants import Participants
 
 
-class Session:
+class Gamesession:
     event = None
     participants = None
     classification = None
@@ -27,7 +27,6 @@ class Session:
         self.track_id = packet['track_id']
         self.formula = packet['formula']
         self.network_game = packet['network_game']
-        return self
 
     def update(self, packet):
         self.total_laps = packet['total_laps']
