@@ -92,6 +92,28 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     event = getEvent(packet.event_string_code)
+
+                    if event == "BUTN":
+                        # button status change event
+                        pass
+                    elif event == "SSTA":
+                        # session starts
+                        pass
+                    elif event == "STLG":
+                        # start light changes
+                        pass
+                    elif event == "LGOT":
+                        # lights out - and there we go!!
+                        pass
+                    elif event == "PENA":
+                        # there is a penalty
+                        # inform session
+                        pass
+                    elif event == "RTMT":
+                        # there is a retirement
+                        # inform session
+                        pass
+
                     print(event)
 
                 elif isinstance(packet, PacketParticipantsData):
