@@ -81,7 +81,7 @@ def main():
                     # check if the session exist
                     if session and isinstance(session, Gamesession):
                         # update session
-                        session = Gamesession.update(packetdata)
+                        session.update(packetdata)
                     else:
                         session = Gamesession()
                         session.update(packetdata)
