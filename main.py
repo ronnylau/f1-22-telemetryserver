@@ -61,6 +61,7 @@ def main():
         }
         lastwrite = None
         carstatus = None
+        session = None
         with open('packets.log', 'w') as log:
             while True:
                 # get the current packet
