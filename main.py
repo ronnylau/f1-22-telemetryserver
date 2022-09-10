@@ -80,7 +80,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # check if the session exist
-                    if session and isinstance(session, Session):
+                    if session and isinstance(session, Gamesession):
                         # update session
                         session = Gamesession.update(packetdata)
                     else:
