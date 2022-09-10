@@ -47,6 +47,7 @@ def _get_listener():
 
 
 def main():
+    global sessionID
     listener = _get_listener()
 
     try:
@@ -56,46 +57,65 @@ def main():
         }
         lastwrite = None
         carstatus = None
+        with open('packets.log', 'a') as log:
+            while True:
+                packet = listener.get()
+                if isinstance(packet, PacketMotionData):
+                    pass
+                elif isinstance(packet, PacketSessionData):
+                    log.write('\nPacketSessionData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketLapData):
+                    racedata = record.trackLapData(packet, racedata, carstatus)
+                    writefile(racedata)
 
-        while True:
-            packet = listener.get()
-            if isinstance(packet, PacketMotionData):
-                pass
-            elif isinstance(packet, PacketSessionData):
-                pass
-            elif isinstance(packet, PacketLapData):
-                racedata = record.trackLapData(packet, racedata, carstatus)
-                writefile(racedata)
-            elif isinstance(packet, PacketEventData):
-                print(packet)
-            elif isinstance(packet, PacketParticipantsData):
-                racedata = record.trackParticipantsData(packet, racedata)
-                writefile(racedata)
-            elif isinstance(packet, PacketCarSetupData):
-                pass
-            elif isinstance(packet, PacketCarTelemetryData):
-                pass
-            elif isinstance(packet, PacketCarStatusData):
-                carstatus = packet
-            elif isinstance(packet, PacketFinalClassificationData):
-                print('Track PacketFinalClassificationData')
-                racedata = record.trackFinalClassification(packet, racedata)
-                # write data
-                print('Session complete')
-                writefile(racedata, force=1)
-                # reset data
-                if (racedata['sessionID'] != sessionID):
-                    racedata = {
-                        'sessionID': None,
-                        'data': {},
-                    }
-                sessionID = racedata['sessionID']
-            elif isinstance(packet, PacketLobbyInfoData):
-                pass
-            elif isinstance(packet, PacketCarDamageData):
-                pass
-            elif isinstance(packet, PacketSessionHistoryData):
-                racedata = record.trackLapHistoryData(packet, racedata, carstatus)
+                    log.write('\nPacketLapData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketEventData):
+                    log.write('\nPacketEventData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketParticipantsData):
+                    racedata = record.trackParticipantsData(packet, racedata)
+                    writefile(racedata)
+                    log.write('\nPacketParticipantsData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketCarSetupData):
+                    log.write('\nPacketCarSetupData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketCarTelemetryData):
+                    log.write('\nPacketCarTelemetryData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketCarStatusData):
+                    carstatus = packet
+
+                    log.write('\nPacketCarStatusData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketFinalClassificationData):
+                    print('Track PacketFinalClassificationData')
+                    racedata = record.trackFinalClassification(packet, racedata)
+                    # write data
+                    print('Session complete')
+                    writefile(racedata, force=1)
+                    # reset data
+                    if (racedata['sessionID'] != sessionID):
+                        racedata = {
+                            'sessionID': None,
+                            'data': {},
+                        }
+                    sessionID = racedata['sessionID']
+
+                    log.write('\nPacketFinalClassificationData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketLobbyInfoData):
+                    log.write('\nPacketLobbyInfoData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketCarDamageData):
+                    log.write('\nPacketCarDamageData\n')
+                    json.dump(packet.to_dict(), log)
+                elif isinstance(packet, PacketSessionHistoryData):
+                    racedata = record.trackLapHistoryData(packet, racedata, carstatus)
+                    log.write('\nPacketSessionHistoryData\n')
+                    json.dump(packet.to_dict(), log)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
