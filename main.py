@@ -84,7 +84,8 @@ def main():
                         # update session
                         session = Gamesession.update(packetdata)
                     else:
-                        session = Gamesession().update(packetdata)
+                        session = Gamesession()
+                        session.update(packetdata)
                     print('Session init')
                     print(session.toJSON())
                 elif isinstance(packet, PacketLapData):
