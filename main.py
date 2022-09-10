@@ -92,29 +92,59 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     event = getEvent(packet.event_string_code)
-
-                    if event == "BUTN":
-                        # button status change event
-                        pass
-                    elif event == "SSTA":
+                    # print(event)
+                    if event == "SSTA":
                         # session starts
+                        print('Session starts')
+                    elif event == "SEND":
+                        # session ends
+                        print('Session ends')
+                    elif event == "FTLP":
+                        # a driver achieves the fastest lap
+                        print('a driver achieves the fastest lap')
+                    elif event == "RTMT":
+                        # a driver retires
+                        print('a driver retires')
+                    elif event == "DRSE":
+                        # drs was enabled by racecontrol
+                        print("drs was enabled by racecontrol")
+                    elif event == "DRSD":
+                        # drs was disabeled by racecontrol
+                        print("drs was disabled by racecontrol")
+                    elif event == "TMPT":
+                        # your teammate is in the pit
                         pass
+                    elif event == "CHQF":
+                        # the chequered flag has been waved
+                        print("the chequered flag has been waved")
+                    elif event == "RCWN":
+                        # the racewinner was announced
+                        print("the racewinner was announced")
+                    elif event == "PENA":
+                        # a penalty has been issued - details in the event
+                        print("a penalty has been issued - details in the event")
+                    elif event == "SPTP":
+                        # speedtrap has been triggerd by fastest lap
+                        print("speedtrap has been triggerd by fastest lap")
                     elif event == "STLG":
-                        # start light changes
+                        # start lights hase been changed
                         pass
                     elif event == "LGOT":
-                        # lights out - and there we go!!
+                        # lights out and here we go!
+                        print("lights out and here we go!")
+                    elif event == "DTSV":
+                        # drive through penalty served
                         pass
-                    elif event == "PENA":
-                        # there is a penalty
-                        # inform session
+                    elif event == "SGSV":
+                        # stop and go penalty served
                         pass
-                    elif event == "RTMT":
-                        # there is a retirement
-                        # inform session
+                    elif event == "FLBK":
+                        # flashback has been activated
+                        pass
+                    elif event == "BUTN":
+                        # a button status has been changed
                         pass
 
-                    print(event)
 
                 elif isinstance(packet, PacketParticipantsData):
                     # racedata = record.trackParticipantsData(packet, racedata)
