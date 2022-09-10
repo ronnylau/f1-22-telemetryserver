@@ -82,10 +82,10 @@ def main():
                     # check if the session exist
                     if session and isinstance(session, Gamesession):
                         # update session
-                        session = Gamesession.update(packetdata)
+                        session = Gamesession.update(packet=packetdata)
                     else:
                         session = Gamesession()
-                        session.update(packetdata)
+                        session.update(packet=packetdata)
                     print('Session init')
                     print(session.toJSON())
                 elif isinstance(packet, PacketLapData):
