@@ -190,6 +190,8 @@ def main():
                     # racedata = record.trackLapHistoryData(packet, racedata, carstatus)
                     log.write('\nPacketSessionHistoryData\n')
                     json.dump(packet.to_dict(), log)
+
+                print(session)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
