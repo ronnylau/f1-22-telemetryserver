@@ -18,7 +18,7 @@ def getconfig():
 
 lastwrite = 0
 sessionID = None
-
+session = None
 
 def writefile(racedata, force=0):
     global lastwrite
@@ -53,7 +53,7 @@ def getEvent(eventStringCode):
 
 def main():
     listener = _get_listener()
-
+    global session
     try:
         racedata = {
             'sessionID': None,
