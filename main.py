@@ -79,7 +79,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # check if the session exist
-                    if isinstance(session, Session):
+                    if session && isinstance(session, Session):
                         # update session
                         session = Session.update(packet)
                     else:
