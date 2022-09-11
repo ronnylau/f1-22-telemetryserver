@@ -153,6 +153,14 @@ def main():
                     # writefile(racedata)
                     log.write('\nPacketParticipantsData\n')
                     json.dump(packet.to_dict(), log)
+
+                    # check if the session exist
+                    if session and isinstance(session, Gamesession):
+                        # update session
+                        session.getparticipants().update(packetdata['participants'])
+                    else:
+                        # session does not exist, skip the paket
+                        continue
                 elif isinstance(packet, PacketCarSetupData):
                     log.write('\nPacketCarSetupData\n')
                     json.dump(packet.to_dict(), log)
