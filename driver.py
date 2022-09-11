@@ -1,4 +1,5 @@
 class Car:
+    setup = {}
     def __int__(self):
         self.motion = None
         self.lap = None
