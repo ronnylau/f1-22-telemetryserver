@@ -5,7 +5,7 @@ class Participants:
     participants = {}
 
     def __int__(self):
-        self.car = Car()
+        pass
 
     def update(self, data):
         for key, value in enumerate(data):
@@ -16,3 +16,7 @@ class Participants:
             return True
         else:
             return False
+
+    def updateSetups(self, data):
+        for key, value in enumerate(self.participants):
+            value.getCar().updateSetup(data['carsetup'][key])

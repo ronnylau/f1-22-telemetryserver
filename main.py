@@ -167,6 +167,9 @@ def main():
                 elif isinstance(packet, PacketCarSetupData):
                     log.write('\nPacketCarSetupData\n')
                     json.dump(packet.to_dict(), log)
+
+                    #try to catch the setup data
+                    
                 elif isinstance(packet, PacketCarTelemetryData):
                     log.write('\nPacketCarTelemetryData\n')
                     json.dump(packet.to_dict(), log)
