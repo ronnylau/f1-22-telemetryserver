@@ -168,8 +168,11 @@ def main():
                     log.write('\nPacketCarSetupData\n')
                     json.dump(packet.to_dict(), log)
 
+                    # if we have all participants already, skip the packet
+                    if session.getparticipants().hasparticipants():
+                        continue
                     #try to catch the setup data
-                    session.updateCarSetups(packetdata)
+                    session.updateCarSetups(packetdata['car_setups'])
                 elif isinstance(packet, PacketCarTelemetryData):
                     log.write('\nPacketCarTelemetryData\n')
                     json.dump(packet.to_dict(), log)
