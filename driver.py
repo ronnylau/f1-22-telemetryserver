@@ -10,9 +10,9 @@ class Car:
         self.laphistory = None
 
     def updateSetup(self, setup):
+        print(setup)
         for key, value in enumerate(setup):
             self.setup[key] = value
-        print(self.setup)
 
 class Driver:
     driver_id = 0
