@@ -11,7 +11,7 @@ class Car:
     def updateSetup(self, setup):
         for key, value in enumerate(setup):
             self.setup[key] = value
-
+        print(self.setup)
 
 class Driver:
     driver_id = 0
