@@ -8,5 +8,5 @@ class Participants:
         self.car = Car()
 
     def update(self, data):
-        for key, value in data:
+        for key, value in data.items:
             self.participants[key] = value
