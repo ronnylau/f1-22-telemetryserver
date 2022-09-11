@@ -156,7 +156,10 @@ def main():
 
                     # check if the session exist
                     if session and isinstance(session, Gamesession):
-                        # update session
+                        # if we have all participants already, skip the packet
+                        if session.getparticipants().hasparticipants():
+                            continue
+                        # update participants
                         session.getparticipants().update(packetdata['participants'])
                     else:
                         # session does not exist, skip the paket
