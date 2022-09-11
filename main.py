@@ -169,7 +169,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # if we have all participants already, skip the packet
-                    if session.getparticipants().hasparticipants():
+                    if not session.getparticipants().hasparticipants():
                         continue
                     #try to catch the setup data
                     session.updateCarSetups(packetdata['car_setups'])
