@@ -16,7 +16,7 @@ class Driver:
     race_number = 0
     name = ""
 
-    def __int__(self, driver):
+    def __init__(self, driver):
         self.driver_id = driver['driver_id']
         self.network_id = driver['network_id']
         self.team_id = driver['team_id']
