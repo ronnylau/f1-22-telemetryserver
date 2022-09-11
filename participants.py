@@ -1,4 +1,4 @@
-from car import Car
+from driver import Car, Driver
 
 
 class Participants:
@@ -10,4 +10,4 @@ class Participants:
     def update(self, data):
         print(data)
         for key, value in enumerate(data):
-            self.participants[key] = value
+            self.participants[key] = Driver(value)
