@@ -46,5 +46,6 @@ class Gamesession:
                           sort_keys=True, indent=4)
 
     def updateCarSetups(self, setupdata):
-        self.participants.updateSetups(setupdata)
+        if self.participants.hasparticipants():
+            self.participants.updateSetups(setupdata)
 
