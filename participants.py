@@ -9,5 +9,5 @@ class Participants:
 
     def update(self, data):
         print(data)
-        for key, value in data.items:
+        for key, value in enumerate(data):
             self.participants[key] = value
