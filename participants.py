@@ -33,7 +33,7 @@ class Participants:
             if self.participants[0].getCar() == self.participants[1].getCar():
                 print("gleich")
 
-            if self.participants[key].driver_id == 2:
+            if self.participants[key].driver_id == (2 or 7):
                 print(self.participants[key].getCar().setup)
 
     def toJSON(self):
