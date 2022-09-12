@@ -30,6 +30,9 @@ class Participants:
             print(f"2 Front Wing = {car_setups[key].get('front_wing')}")
             self.participants[key].getCar().updateSetup(car_setups[key])
 
+            if self.participants[key].driver_id == 2:
+                print(self.participants[key].getCar().setup)
+
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                          sort_keys=True, indent=4)
