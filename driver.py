@@ -22,7 +22,7 @@ class Car:
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        print(self.toJSON())
+        return self.toJSON()
 
 
 class Driver:
