@@ -192,7 +192,7 @@ def main():
                         participantList = session.getparticipants()
                         for key, driver in enumerate(participantList.participants):
                             print(participantList.participants[key])
-
+                            print(participantList.participants[key].getCar().setup)
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketLobbyInfoData):
