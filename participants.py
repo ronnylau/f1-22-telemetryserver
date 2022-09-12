@@ -21,10 +21,10 @@ class Participants:
 
     def updateSetups(self, car_setups):
         print('aufruf Participants.updateSetups')
-        print('driver info')
-        print(self.participants[key])
         print('beginn for schleife in Participants.updateSetups')
         for key, value in enumerate(self.participants):
+            print('driver info')
+            print(self.participants[key])
             print(f'key = {key} value = {value}')
             print('prüfe ob driver_id == 255')
             if self.participants[key].driver_id == 255:
