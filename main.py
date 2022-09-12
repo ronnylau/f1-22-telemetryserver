@@ -187,17 +187,28 @@ def main():
                     log.write('\nPacketCarStatusData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketFinalClassificationData):
+                    print('schreibe resultat')
                     with open('result.log', 'w') as result:
                         # try to display all infomation
                         # start with session infos
                         result.write(str(session))
+                        print(str(session))
                         result.write('\nDrivers:\n')
+                        print('fahrer:')
                         # list all priticipants
                         if session.getparticipants().hasparticipants():
                             participantList = session.getparticipants()
+                            print(participantList)
+                            print('beginn for schleife in PacketFinalClassificationData')
                             for key, driver in enumerate(participantList.participants):
+                                print(f'key = {key} driver = {driver}')
+                                print('get the participant')
+                                print(str(participant))
                                 participant = participantList.participants[key]
                                 result.write(str(participant) + '\n')
+                                print('zeige setup des fahrers')
+                                print(participant.getCar())
+                                print(participant.getCar().setup)
                                 result.write('\t\t' + str(participant.getCar().setup) + '\n')
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
