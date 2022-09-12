@@ -45,5 +45,8 @@ class Gamesession:
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
 
+    def __str__(self):
+        return self.toJSON()
+
     def updateCarSetups(self, car_setups):
         self.participants.updateSetups(car_setups)

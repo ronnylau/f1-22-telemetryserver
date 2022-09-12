@@ -1,3 +1,6 @@
+import json
+
+
 class Car:
     setup = {}
     def __int__(self):
@@ -31,3 +34,10 @@ class Driver:
 
     def getCar(self):
         return self.car
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
+    def __str__(self):
+        return self.toJSON()
