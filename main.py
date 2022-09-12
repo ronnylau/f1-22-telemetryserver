@@ -186,7 +186,7 @@ def main():
                     # try to display all infomation
                     # start with session infos
                     print(session)
-                    print('\nDrivers:')
+                    print('Drivers:')
                     # list all priticipants
                     if session.getparticipants().hasparticipants():
                         participantList = session.getparticipants()
