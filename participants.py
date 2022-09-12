@@ -20,9 +20,12 @@ class Participants:
             return False
 
     def updateSetups(self, car_setups):
+        print('Update Setups')
         for key, value in enumerate(self.participants):
             if self.participants[key].driver_id == 255:
                 continue
+
+            print(f"Key {key}")
             print(f'1 Write Setup data for Driver #{self.participants[key].driver_id} {self.participants[key].name}')
             print(f"2 Front Wing = {car_setups[key].get('front_wing')}")
             self.participants[key].getCar().updateSetup(car_setups[key])
