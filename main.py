@@ -104,12 +104,6 @@ def main():
                     elif event == "SEND":
                         # session ends
                         print('Session ends')
-
-                        # try to display all infomation
-                        # start with session infos
-                        print(session)
-
-
                     elif event == "FTLP":
                         # a driver achieves the fastest lap
                         print('a driver achieves the fastest lap')
@@ -189,18 +183,15 @@ def main():
                     log.write('\nPacketCarStatusData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketFinalClassificationData):
-                    # print('Track PacketFinalClassificationData')
-                    # racedata = record.trackFinalClassification(packet, racedata)
-                    # write data
-                    # print('Session complete')
-                    # writefile(racedata, force=1)
-                    # reset data
-                    """if (racedata['sessionID'] != sessionID):
-                        racedata = {
-                            'sessionID': None,
-                            'data': {},
-                        }"""
-                    # sessionID = racedata['sessionID']
+                    # try to display all infomation
+                    # start with session infos
+                    print(session)
+
+                    # list all priticipants
+                    if session.getparticipants().hasparticipants():
+                        participants = session.getparticipants()
+                        for key, driver in enumerate(participants.participants):
+                            print(driver)
 
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
