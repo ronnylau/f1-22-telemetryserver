@@ -22,7 +22,7 @@ class Participants:
     def updateSetups(self, car_setups):
         print('aufruf Participants.updateSetups')
         print('driver info')
-        print(self)
+        print(self.participants[key])
         print('beginn for schleife in Participants.updateSetups')
         for key, value in enumerate(self.participants):
             print(f'key = {key} value = {value}')
