@@ -20,7 +20,6 @@ class Participants:
             return False
 
     def updateSetups(self, car_setups):
-        print(self.participants)
         for key, value in enumerate(self.participants):
             self.participants[key].getCar().updateSetup(car_setups[key])
 
