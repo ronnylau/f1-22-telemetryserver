@@ -48,4 +48,5 @@ class Gamesession:
     def updateCarSetups(self, car_setups):
         self.participants.updateSetups(car_setups)
 
-        print(self.participants)
+        for index, value in enumerate(self.participants):
+            print(self.participants[index].getCar())
