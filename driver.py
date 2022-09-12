@@ -48,5 +48,6 @@ class Driver:
 
     def __str__(self):
         print(self.toJSON())
-        print(self.car)
+        if self.car:
+            print(self.car)
 
