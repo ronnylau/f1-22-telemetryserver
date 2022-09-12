@@ -3,6 +3,7 @@ import json
 
 class Car:
     setup = {}
+    name = 'foo'
 
     def __int__(self):
         self.motion = None
