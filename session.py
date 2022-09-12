@@ -47,7 +47,8 @@ class Gamesession:
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        return self.toJSON()
+        return f"Total Laps: {self.total_laps} Track lenght {self.track_length} Session Type {self.session_type}" \
+               f"Track ID {self.track_id}"
 
     def updateCarSetups(self, car_setups):
         self.participants.updateSetups(car_setups)

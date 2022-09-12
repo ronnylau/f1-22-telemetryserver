@@ -104,6 +104,12 @@ def main():
                     elif event == "SEND":
                         # session ends
                         print('Session ends')
+
+                        # try to display all infomation
+                        # start with session infos
+                        print(session)
+
+
                     elif event == "FTLP":
                         # a driver achieves the fastest lap
                         print('a driver achieves the fastest lap')
