@@ -186,14 +186,14 @@ def main():
                     with open('result.log', 'w') as result:
                         # try to display all infomation
                         # start with session infos
-                        result.write(session)
+                        result.write(str(session))
                         result.write('\nDrivers:')
                         # list all priticipants
                         if session.getparticipants().hasparticipants():
                             participantList = session.getparticipants()
                             for key, driver in enumerate(participantList.participants):
-                                result.write(participantList.participants[key])
-                                result.write(participantList.participants[key].getCar().setup)
+                                result.write(str(participantList.participants[key]))
+                                result.write(str(participantList.participants[key].getCar().setup))
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketLobbyInfoData):
