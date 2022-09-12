@@ -203,8 +203,8 @@ def main():
                             for key, driver in enumerate(participantList.participants):
                                 print(f'key = {key} driver = {driver}')
                                 print('get the participant')
-                                print(str(participant))
                                 participant = participantList.participants[key]
+                                print(str(participant))
                                 result.write(str(participant) + '\n')
                                 print('zeige setup des fahrers')
                                 print(participant.getCar())
