@@ -24,6 +24,7 @@ class Car:
                           sort_keys=True, indent=4)
 
     def __str__(self):
+        print('call tostring car')
         return self.toJSON()
 
 
