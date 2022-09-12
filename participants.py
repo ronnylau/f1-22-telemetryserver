@@ -34,6 +34,7 @@ class Participants:
                 print("gleich")
 
             if self.participants[key].driver_id == (2 or 7):
+                print(self.participants[key].name)
                 print(self.participants[key].getCar().setup)
 
     def toJSON(self):
