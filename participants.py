@@ -20,4 +20,5 @@ class Participants:
     def updateSetups(self, car_setups):
         print(self.participants)
         for key, value in enumerate(self.participants):
+            print(car_setups[key])
             self.participants[key].getCar().updateSetup(car_setups[key])
