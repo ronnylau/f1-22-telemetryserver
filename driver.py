@@ -15,7 +15,12 @@ class Car:
         self.laphistory = None
 
     def updateSetup(self, setup):
+        print('aufruf von Car.updatesetup mit Daten:')
+        print(setup)
+        print('beginn for schleife in Car.updatesetup')
         for key, value in enumerate(setup):
+            print(f'key = {key} value={value}')
+            print(f'setze neuen wert {value} auf {setup.get(value)}')
             self.setup[value] = setup.get(value)
 
     def toJSON(self):
@@ -23,8 +28,6 @@ class Car:
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        print('call tostring car')
-        print(self.setup)
         return self.toJSON()
 
 

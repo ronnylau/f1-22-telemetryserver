@@ -51,4 +51,6 @@ class Gamesession:
                f"Track ID {self.track_id}"
 
     def updateCarSetups(self, car_setups):
+        print('aufruf session.updateCarSetups')
+        print('uebergabe an self.participants.updateSetups')
         self.participants.updateSetups(car_setups)

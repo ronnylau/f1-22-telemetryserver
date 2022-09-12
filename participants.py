@@ -20,10 +20,19 @@ class Participants:
             return False
 
     def updateSetups(self, car_setups):
-        print('Update Setups')
+        print('aufruf Participants.updateSetups')
+        print('driver info')
+        print(self)
+        print('beginn for schleife in Participants.updateSetups')
         for key, value in enumerate(self.participants):
+            print(f'key = {key} value = {value}')
+            print('prüfe ob driver_id == 255')
             if self.participants[key].driver_id == 255:
+                print('padding gefunden, continue')
                 continue
+            print('aufruf self.participants[key].getCar().updateSetup(car_setups[key])')
+            print('daten:')
+            print(car_setups[key])
             self.participants[key].getCar().updateSetup(car_setups[key])
 
 

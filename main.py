@@ -171,8 +171,12 @@ def main():
 
                     # if we have all participants already, skip the packet
                     if not session or not session.getparticipants().hasparticipants():
+                        print('keine teilnehmer vorhanden, continue')
                         continue
                     # try to catch the setup data
+                    print('uebergabe der setups an session.updateCarSetups')
+                    print('Details \n')
+                    print(packetdata['car_setups'])
                     session.updateCarSetups(packetdata['car_setups'])
                 elif isinstance(packet, PacketCarTelemetryData):
                     log.write('\nPacketCarTelemetryData\n')
