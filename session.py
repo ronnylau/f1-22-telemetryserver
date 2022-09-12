@@ -57,5 +57,5 @@ class Gamesession:
             val = getattr(obj, a)
             if isinstance(val, (int, float, str, list, dict, set)):
                 print(level * ' ', a, val, type(val))
-            elif isinstance(val, (Participants, Car, Driver, Gamesession):
+            elif isinstance(val, (Participants, Car, Driver, Gamesession)):
                 self.dump(val, level=level + 1)
