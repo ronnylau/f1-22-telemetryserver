@@ -20,6 +20,7 @@ lastwrite = 0
 sessionID = None
 session = None
 
+
 def writefile(racedata, force=0):
     global lastwrite
     config = getconfig()
@@ -49,6 +50,7 @@ def _get_listener():
 def getEvent(eventStringCode):
     eventCode = chr(eventStringCode[0]) + chr(eventStringCode[1]) + chr(eventStringCode[2]) + chr(eventStringCode[3])
     return eventCode
+
 
 def main():
     listener = _get_listener()
@@ -170,7 +172,7 @@ def main():
                     # if we have all participants already, skip the packet
                     if session and not session.getparticipants().hasparticipants():
                         continue
-                    #try to catch the setup data
+                    # try to catch the setup data
                     session.updateCarSetups(packetdata['car_setups'])
 
                     print(session.getparticipants())
@@ -208,7 +210,8 @@ def main():
                     # racedata = record.trackLapHistoryData(packet, racedata, carstatus)
                     log.write('\nPacketSessionHistoryData\n')
                     json.dump(packet.to_dict(), log)
-                dump(session)
+                if session:
+                    session.dump(session)
     except KeyboardInterrupt:
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
