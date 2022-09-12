@@ -55,7 +55,7 @@ def dump(obj, level=0):
     for a in dir(obj):
         val = getattr(obj, a)
         if isinstance(val, (int, float, str, list, dict, set)):
-            print(level * ' ', a, val)
+            print(level * ' ', a, val, type(val))
         else:
             # dump(val, level=level + 1)
             pass
