@@ -52,3 +52,4 @@ class Driver:
         print(self.toJSON())
         if isinstance(self.car, Car):
             print(self.car)
+        return self.toJSON()
