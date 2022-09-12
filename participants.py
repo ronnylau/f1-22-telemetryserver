@@ -30,6 +30,8 @@ class Participants:
                          sort_keys=True, indent=4))
         for key, value in enumerate(self.participants):
             print(self.participants[key])
+        return json.dumps(self, default=lambda o: o.__dict__,
+                         sort_keys=True, indent=4)
 
     def __str__(self):
         return self.toJSON()
