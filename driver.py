@@ -49,4 +49,4 @@ class Driver:
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        return f"\nDriverID {self.driver_id} NetworkID {self.network_id} TeamID {self.team_id} Name {self.name}"
+        return f"\tDriverID {self.driver_id} NetworkID {self.network_id} TeamID {self.team_id} Name {self.name}\n"
