@@ -17,8 +17,6 @@ class Car:
         for key, value in enumerate(setup):
             self.setup[value] = setup[value]
 
-            print(f'write setup item {value} with value {setup[value]}')
-
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
