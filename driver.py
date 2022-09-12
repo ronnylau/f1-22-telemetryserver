@@ -3,6 +3,7 @@ import json
 
 class Car:
     setup = {}
+
     def __int__(self):
         self.motion = None
         self.lap = None
@@ -22,6 +23,7 @@ class Car:
 
     def __str__(self):
         print(self.toJSON())
+
 
 class Driver:
     driver_id = 0
@@ -48,6 +50,5 @@ class Driver:
 
     def __str__(self):
         print(self.toJSON())
-        if self.car:
+        if isinstance(self.car, Car):
             print(self.car)
-
