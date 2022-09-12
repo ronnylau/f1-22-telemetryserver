@@ -24,16 +24,7 @@ class Participants:
         for key, value in enumerate(self.participants):
             if self.participants[key].driver_id == 255:
                 continue
-
-            #print(f"Key {key}")
-            #print(f'1 Write Setup data for Driver #{self.participants[key].driver_id} {self.participants[key].name}')
-            #print(f"2 Front Wing = {car_setups[key].get('front_wing')}")
             self.participants[key].getCar().updateSetup(car_setups[key])
-
-            print('Teilnehmer 20')
-            print(self.participants[19].getCar())
-            print('Teilnehmer 2')
-            print(self.participants[1].getCar())
 
 
     def toJSON(self):
