@@ -173,6 +173,8 @@ def main():
                         continue
                     #try to catch the setup data
                     session.updateCarSetups(packetdata['car_setups'])
+
+                    print(session.getparticipants().toJSON())
                 elif isinstance(packet, PacketCarTelemetryData):
                     log.write('\nPacketCarTelemetryData\n')
                     json.dump(packet.to_dict(), log)

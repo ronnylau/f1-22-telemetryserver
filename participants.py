@@ -21,3 +21,7 @@ class Participants:
         print(self.participants)
         for key, value in enumerate(self.participants):
             self.participants[key].getCar().updateSetup(car_setups[key])
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
