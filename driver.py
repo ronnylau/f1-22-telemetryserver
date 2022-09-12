@@ -16,6 +16,13 @@ class Car:
         for key, value in enumerate(setup):
             self.setup[key] = value
 
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
+    def __str__(self):
+        print(self.toJSON())
+
 class Driver:
     driver_id = 0
     network_id = 0
@@ -40,4 +47,6 @@ class Driver:
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        return self.toJSON()
+        print(self.toJSON())
+        print(self.car)
+

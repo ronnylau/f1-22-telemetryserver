@@ -1,4 +1,5 @@
 import json
+
 from driver import Car, Driver
 
 
@@ -24,8 +25,11 @@ class Participants:
             self.participants[key].getCar().updateSetup(car_setups[key])
 
     def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__,
-                          sort_keys=True, indent=4)
+
+        print(json.dumps(self, default=lambda o: o.__dict__,
+                         sort_keys=True, indent=4))
+        for key, value in enumerate(self.participants):
+            print(self.participants[key])
 
     def __str__(self):
         return self.toJSON()
