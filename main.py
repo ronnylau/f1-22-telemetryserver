@@ -57,7 +57,8 @@ def dump(obj, level=0):
         if isinstance(val, (int, float, str, list, dict, set)):
             print(level * ' ', val)
         else:
-            dump(val, level=level + 1)
+            # dump(val, level=level + 1)
+            pass
 
 def main():
     listener = _get_listener()
