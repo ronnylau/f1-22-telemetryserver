@@ -29,7 +29,7 @@ class Driver:
     team_id = 0
     race_number = 0
     name = ""
-    car = Car()
+    car = None
 
     def __init__(self, driver):
         self.driver_id = driver['driver_id']
