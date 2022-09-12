@@ -25,6 +25,7 @@ class Car:
 
     def __str__(self):
         print('call tostring car')
+        print(self.setup)
         return self.toJSON()
 
 
