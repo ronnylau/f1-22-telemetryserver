@@ -11,7 +11,7 @@ class Participants:
 
     def update(self, data):
         for key, value in enumerate(data):
-            self.participants[key] = Driver(value[key])
+            self.participants[key] = Driver(value)
 
     def hasparticipants(self):
         if len(self.participants) > 0:
