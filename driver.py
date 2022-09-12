@@ -49,7 +49,4 @@ class Driver:
                           sort_keys=True, indent=4)
 
     def __str__(self):
-        print(self.toJSON())
-        if isinstance(self.car, Car):
-            print(self.car)
         return self.toJSON()
