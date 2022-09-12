@@ -34,6 +34,8 @@ class Participants:
             print('daten:')
             print(car_setups[key])
             self.participants[key].getCar().updateSetup(car_setups[key])
+            print('setup nach update')
+            print(self.participants[key].getCar().setup)
 
 
     def toJSON(self):
