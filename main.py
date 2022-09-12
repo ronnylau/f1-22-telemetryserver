@@ -189,9 +189,9 @@ def main():
 
                     # list all priticipants
                     if session.getparticipants().hasparticipants():
-                        participants = session.getparticipants()
-                        for key, driver in enumerate(participants.participants):
-                            print(driver)
+                        participantList = session.getparticipants()
+                        for key, driver in enumerate(participantList.participants):
+                            print(participantList.participants[key])
 
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
