@@ -16,6 +16,7 @@ class Car:
     def updateSetup(self, setup):
         for key, value in enumerate(setup):
             self.setup[value] = setup.get(value)
+            print(self.setup.get("front_wing"))
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
