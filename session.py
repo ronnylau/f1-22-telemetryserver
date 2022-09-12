@@ -1,4 +1,5 @@
 from participants import Participants
+from driver import Car, Driver
 import json
 
 
@@ -50,3 +51,11 @@ class Gamesession:
 
     def updateCarSetups(self, car_setups):
         self.participants.updateSetups(car_setups)
+
+    def dump(self, obj, level=0):
+        for a in dir(obj):
+            val = getattr(obj, a)
+            if isinstance(val, (int, float, str, list, dict, set)):
+                print(level * ' ', a, val, type(val))
+            elif isinstance(val, (Participants, Car, Driver, Gamesession):
+                self.dump(val, level=level + 1)

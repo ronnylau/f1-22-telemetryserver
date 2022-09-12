@@ -50,16 +50,6 @@ def getEvent(eventStringCode):
     eventCode = chr(eventStringCode[0]) + chr(eventStringCode[1]) + chr(eventStringCode[2]) + chr(eventStringCode[3])
     return eventCode
 
-
-def dump(obj, level=0):
-    for a in dir(obj):
-        val = getattr(obj, a)
-        #if isinstance(val, (int, float, str, list, dict, set)):
-        print(level * ' ', a, val, type(val))
-        # else:
-            # dump(val, level=level + 1)
-            # pass
-
 def main():
     listener = _get_listener()
     global session
