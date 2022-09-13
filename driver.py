@@ -8,10 +8,7 @@ class Driver:
     name = ""
 
     class Car:
-        setup = {}
-        name = 'foo'
-
-        def __int__(self):
+        def __init__(self):
             self.motion = None
             self.lap = None
             self.setup = {}

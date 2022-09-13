@@ -5,7 +5,7 @@ import json
 
 class Gamesession:
     event = None
-    participants = None
+    participants = {}
     classification = None
     lobbyinfo = None
 
@@ -18,7 +18,7 @@ class Gamesession:
 
     def __init__(self):
         self.event = None
-        self.participants = Participants()
+        self.participants = {}
         self.classification = None
         self.lobbyinfo = None
 
@@ -30,6 +30,9 @@ class Gamesession:
         self.formula = packet['formula']
         self.network_game = packet['network_game']
 
+    def addParticipant(self, key, driverInfo):
+        for index, value in enumerate(driverInfo):
+            self.participants[key] = Participants()
     def getevent(self):
         return self.event
 
