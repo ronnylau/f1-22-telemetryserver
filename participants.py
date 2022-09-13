@@ -1,6 +1,6 @@
 import json
 
-from driver import Car, Driver
+from driver import Driver
 
 
 class Participants:
