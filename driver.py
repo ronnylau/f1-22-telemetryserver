@@ -2,12 +2,6 @@ import json
 
 
 class Driver:
-    driver_id = 0
-    network_id = 0
-    team_id = 0
-    race_number = 0
-    name = ""
-
     class Car:
         def __init__(self):
             self.motion = None
@@ -19,12 +13,7 @@ class Driver:
             self.laphistory = None
 
         def updateSetup(self, setup):
-            print('aufruf von Car.updatesetup mit Daten:')
-            print(setup)
-            print('beginn for schleife in Car.updatesetup')
             for key, value in enumerate(setup):
-                print(f'key = {key} value={value}')
-                print(f'setze neuen wert {value} auf {setup.get(value)}')
                 self.setup[value] = setup.get(value)
 
         def toJSON(self):

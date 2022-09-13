@@ -174,9 +174,6 @@ def main():
                         print('keine teilnehmer vorhanden, continue')
                         continue
                     # try to catch the setup data
-                    print('uebergabe der setups an session.updateCarSetups')
-                    print('Details \n')
-                    print(packetdata['car_setups'])
                     session.updateCarSetups(packetdata['car_setups'])
                 elif isinstance(packet, PacketCarTelemetryData):
                     log.write('\nPacketCarTelemetryData\n')
@@ -192,23 +189,13 @@ def main():
                         # try to display all infomation
                         # start with session infos
                         result.write(str(session))
-                        print(str(session))
                         result.write('\nDrivers:\n')
-                        print('fahrer:')
                         # list all priticipants
                         if session.getparticipants().hasparticipants():
                             participantList = session.getparticipants()
-                            print(participantList)
-                            print('beginn for schleife in PacketFinalClassificationData')
                             for key, driver in enumerate(participantList.participants):
-                                print(f'key = {key} driver = {driver}')
-                                print('get the participant')
                                 participant = participantList.participants[key]
-                                print(str(participant))
                                 result.write(str(participant) + '\n')
-                                print('zeige setup des fahrers')
-                                print(participant.getCar())
-                                print(participant.getCar().setup)
                                 result.write('\t\t' + str(participant.getCar().setup) + '\n')
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
