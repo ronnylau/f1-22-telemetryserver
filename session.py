@@ -4,23 +4,18 @@ import json
 
 
 class Gamesession:
-    event = None
-    participants = {}
-    classification = None
-    lobbyinfo = None
-
-    total_laps = 0
-    track_length = 0
-    session_type = 0
-    track_id = 0
-    formula = 0
-    network_game = 0
 
     def __init__(self):
         self.event = None
         self.participants = {}
         self.classification = None
         self.lobbyinfo = None
+        self.total_laps = 0
+        self.track_length = 0
+        self.session_type = 0
+        self.track_id = 0
+        self.formula = 0
+        self.network_game = 0
 
     def update(self, packet):
         self.total_laps = packet['total_laps']
@@ -33,6 +28,7 @@ class Gamesession:
     def addParticipant(self, key, driverInfo):
         for index, value in enumerate(driverInfo):
             self.participants[key] = Participants()
+
     def getevent(self):
         return self.event
 

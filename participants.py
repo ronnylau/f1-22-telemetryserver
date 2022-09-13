@@ -6,9 +6,6 @@ from driver import Driver
 class Participants:
     participants = {}
 
-    def __int__(self):
-        pass
-
     def update(self, data):
         for key, value in enumerate(data):
             self.participants[key] = Driver(value)
@@ -43,10 +40,9 @@ class Participants:
             print(f'key = {key} value = {value}')
             print(self.participants[key].getCar().setup)
 
-
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
-                         sort_keys=True, indent=4)
+                          sort_keys=True, indent=4)
 
     def __str__(self):
         return self.toJSON()
