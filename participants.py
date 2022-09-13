@@ -36,6 +36,12 @@ class Participants:
             self.participants[key].getCar().updateSetup(car_setups[key])
             print('setup nach update')
             print(self.participants[key].getCar().setup)
+        print('zeige alle setups nach den updates')
+        for key, value in enumerate(self.participants):
+            print('driver info')
+            print(self.participants[key])
+            print(f'key = {key} value = {value}')
+            print(self.participants[key].getCar().setup)
 
 
     def toJSON(self):
