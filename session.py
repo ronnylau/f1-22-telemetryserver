@@ -1,5 +1,5 @@
 from participants import Participants
-from driver import Car, Driver
+from driver import Driver
 import json
 
 
