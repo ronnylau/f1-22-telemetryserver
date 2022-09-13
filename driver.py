@@ -1,5 +1,6 @@
 import json
 
+
 class Driver:
     driver_id = 0
     network_id = 0
@@ -26,12 +27,13 @@ class Driver:
                 print(f'setze neuen wert {value} auf {setup.get(value)}')
                 self.setup[value] = setup.get(value)
 
-        """def toJSON(self):
+        def toJSON(self):
             return json.dumps(self, default=lambda o: o.__dict__,
                               sort_keys=True, indent=4)
 
         def __str__(self):
-            return self.toJSON()"""
+            return self.toJSON()
+
     def __init__(self, driver):
         self.driver_id = driver['driver_id']
         self.network_id = driver['network_id']
