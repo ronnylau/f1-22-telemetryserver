@@ -196,10 +196,7 @@ def main():
                             for key, driver in enumerate(participantList):
                                 participant = participantList[key]
                                 result.write(str(participant) + '\n')
-                                #write setup
                                 result.write('\t\t' + str(participant.getCar().setup) + '\n')
-                                #write damage
-                                result.write('\t\t' + str(participant.getCar().damage) + '\n')
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
                 elif isinstance(packet, PacketLobbyInfoData):
