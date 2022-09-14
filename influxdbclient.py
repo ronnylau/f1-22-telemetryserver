@@ -1,10 +1,6 @@
-from datetime import datetime
-from dotenv import load_dotenv, main
-import os
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS, ASYNCHRONOUS
-from datetime import datetime
-import csv
+
 
 
 class InfluxClient:
