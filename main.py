@@ -160,7 +160,8 @@ def main():
                         if len(session.getparticipants()) > 0:
                             continue
                         # update participants
-                        session.getparticipants().update(packetdata['participants'])
+                        for key, value in enumerate(packetdata['participants']):
+                            session.addParticipant(key, packetdata['participants'])
                     else:
                         # session does not exist, skip the paket
                         continue
