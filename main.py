@@ -192,8 +192,10 @@ def main():
                     rows = []
                     date = packetdata['car_telemetry_data'][0]['speed']
                     line_protocol_string = ''
-                    line_protocol_string += f'speed_{date},'
-                    line_protocol_string += str(datetime.now())
+                    line_protocol_string += f'MSFT_{str(int(datetime.strptime(date, "%Y-%m-%d").timestamp()))},'
+                    line_protocol_string += f'stock=MSFT '
+                    line_protocol_string += f"Speed={packetdata['car_telemetry_data'][0]['speed']}"
+                    line_protocol_string += str(int(datetime.strptime(date, '%Y-%m-%d').timestamp()))
                     rows.append(line_protocol_string)
 
                     IC.write_data(rows)
