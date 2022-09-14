@@ -213,9 +213,8 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         )
 
     def handle_CarTelemetryData(self, packet: PacketCarTelemetryData):
-        # if self.motion_data is None:
-        #    return
-        #
+        if self.motion_data is None:
+            return
         try:
             data = packet.car_telemetry_data[_player_index(packet)].to_dict()
         except IndexError:
