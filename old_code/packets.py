@@ -5,6 +5,7 @@ https://answers.ea.com/t5/General-Discussion/F1-22-UDP-Specification/m-p/1155127
 
 import ctypes
 from enum import Enum
+from listener import PacketListener
 
 
 class PacketMixin(object):
@@ -603,14 +604,9 @@ HEADER_FIELD_TO_PACKET_TYPE = {
     (2022, 1, 10): PacketCarDamageData,
     (2022, 1, 11): PacketSessionHistoryData,
 }
+
+
 # [[[end]]]
-
-
-def resolve(packet):
-    header = PacketHeader.from_buffer_copy(packet)
-    key = (header.packet_format, header.packet_version, header.packet_id)
-    return HEADER_FIELD_TO_PACKET_TYPE[key].unpack(packet)
-
 
 class Tyre(Enum):
     RL = 0
@@ -654,3 +650,21 @@ TRACKS = {
     29: "Jeddah",
     30: "Miami",
 }
+
+class PacketHandler:
+    def __init__(self, listener: PacketListener):
+        self.listener = listener
+
+    def handle_generic(self, packet):
+        pass
+
+    def handle(self):
+        for packet in self.listener:
+            self.handle_generic(packet)
+
+            name = packet.__class__.__name__
+            if name.startswith("Packet"):
+                name = name[6:]
+            handler = getattr(self, f"handle_{name}", None)
+            if handler is not None:
+                handler(packet)
