@@ -1,6 +1,6 @@
 from participants import Participants
 import json
-from driver import Driver
+
 
 class Gamesession:
 
@@ -25,7 +25,8 @@ class Gamesession:
         self.network_game = packet['network_game']
 
     def addParticipant(self, key, driverInfo):
-        self.participants[key] = Driver(driverInfo[key])
+        for index, value in enumerate(driverInfo):
+            self.participants[key] = Participants()
 
     def getevent(self):
         return self.event
