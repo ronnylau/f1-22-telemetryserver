@@ -90,6 +90,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
 
     def push(self, fields: t.Dict[str, t.Any]):
         print('push')
+        print(fields)
         current_time = self.session.time
         if (
             self.session is None
@@ -133,6 +134,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             self.last_live_data[_type] = live_data
 
     def collect(self):
+        print('collect')
         return self.handle()
 
     # ---- SessionEventHandler ----
@@ -193,8 +195,9 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
     # ---- PacketHandler ----
 
     def handle_SessionData(self, packet):
+        print('handle_SessionData')
         self.session.refresh(packet)
-
+        print(self)
         self.push_live(
             "weather_data",
             {
@@ -319,6 +322,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         self.session.lap_data(data)
 
     def handle_MotionData(self, packet):
+        print('handle_MotionData')
         try:
             self.motion_data = packet.car_motion_data[_player_index(packet)].to_dict()
         except IndexError:
