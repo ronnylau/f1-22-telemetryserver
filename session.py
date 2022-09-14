@@ -49,5 +49,4 @@ class Gamesession:
                f"Track ID {self.track_id}"
 
     def updateCarSetups(self, car_setups):
-        for index, value in enumerate(self.participants):
-            self.participants[index].getCar().updateSetup(car_setups['index'])
+        self.participants.updateSetups(car_setups)
