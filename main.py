@@ -170,7 +170,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # if we have all participants already, skip the packet
-                    if not session or not session.getparticipants().hasparticipants():
+                    if not session or len(session.getparticipants()) == 0:
                         print('keine teilnehmer vorhanden, continue')
                         continue
                     # try to catch the setup data
