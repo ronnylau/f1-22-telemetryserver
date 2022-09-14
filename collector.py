@@ -93,10 +93,10 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         print(fields)
         current_time = self.session.time
         if (
-                self.session is None
-                or self.session.lap == 0
-                or self.distance < 0
-                or current_time is None
+            self.session is None
+            or self.session.lap == 0
+            or self.distance < 0
+            or current_time is None
         ):
             return
 
@@ -144,8 +144,8 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         if time <= 0:
             return
 
-        best_time = sum(self.session.best_lap_sectors[1: n + 1])
-        current_time = sum(self.session.sectors[1: n + 1])
+        best_time = sum(self.session.best_lap_sectors[1 : n + 1])
+        current_time = sum(self.session.sectors[1 : n + 1])
 
         self.printer.print_sector(
             n, lap, time, best, best_time == 0 or current_time < best_time
@@ -210,7 +210,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
                             s
                             for s in packet.weather_forecast_samples
                             if s.time_offset > 0
-                               and s.session_type == packet.session_type
+                            and s.session_type == packet.session_type
                         ),
                     )
                 ],
@@ -319,6 +319,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
                 self.gap /= 1000.0
                 self.rival_distance = rival.lap_distance
             self.distance = data.lap_distance
+
         except IndexError:
             return
         except Exception as e:
@@ -333,7 +334,6 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             return
         except Exception as e:
             print(e)
-
     def handle_EventData(self, packet: PacketEventData):
         event = bytes(packet.event_string_code).decode()
         if event == "FLBK":
