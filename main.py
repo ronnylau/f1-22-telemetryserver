@@ -73,8 +73,7 @@ def main():
                     continue
 
                 if isinstance(packet, PacketMotionData):
-                    # skip motion packets
-                    pass
+                    print('MotionData')
                 elif isinstance(packet, PacketSessionData):
                     log.write('\nPacketSessionData\n')
                     json.dump(packet.to_dict(), log)
