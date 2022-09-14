@@ -161,7 +161,7 @@ def main():
                         if len(session.getparticipants()) > 0:
                             continue
                         # update participants
-                        session.getparticipants().update(packetdata['participants'])
+                        session.addParticipants(packetdata['participants'])
                     else:
                         # session does not exist, skip the paket
                         continue
