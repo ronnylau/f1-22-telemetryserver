@@ -16,5 +16,7 @@ class PacketHandler:
             if name.startswith("Packet"):
                 name = name[6:]
             handler = getattr(self, f"handle_{name}", None)
+            print(name)
+            print(handler)
             if handler is not None:
                 handler(packet)
