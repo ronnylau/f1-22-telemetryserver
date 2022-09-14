@@ -11,7 +11,7 @@ from datetime import datetime
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
-
+from influxdbclient import InfluxClient
 def getconfig():
     config = {
         'path': '.',
@@ -188,12 +188,15 @@ def main():
                     org = "F1O"
                     bucket = "f1-telemetry"
 
-                    with InfluxDBClient(url="http://85.14.247.158:8086", token=token, org=org) as client:
-                        point = Point("mem") \
-                            .tag("host", "host1") \
-                            .field("speed", packetdata['car_telemetry_data'][0]['speed']) \
-                            .time(datetime.utcnow(), WritePrecision.NS)
-                        write_api.write(bucket, org, point)
+                    IC = InfluxClient(token, org, bucket)
+                    rows = []
+                    date = packetdata['car_telemetry_data'][0]['speed']
+                    line_protocol_string = ''
+                    line_protocol_string += f'speed_{date},'
+                    line_protocol_string += str(datetime.now())
+                    rows.append(line_protocol_string)
+
+                    IC.write_data(rows)
 
 
 
