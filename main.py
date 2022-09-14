@@ -5,7 +5,7 @@ from threading import Thread
 from session import Gamesession
 
 from packets import *
-from listener import PacketListener
+from listener import TelemetryListener, PacketListener
 import time
 from storage import InfluxDBSink
 from storage import InfluxDBSinkError
