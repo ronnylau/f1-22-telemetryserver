@@ -12,7 +12,7 @@ Handler = lambda *args: http.server.SimpleHTTPRequestHandler(
 def serve(org, token):
     with http.server.ThreadingHTTPServer(("", PORT), Handler) as httpd:
         print(
-            f"Telemetry app URL: http://85.14.247:{PORT}/index.html?org={org}&token={token}"
+            f"Telemetry app URL: http://localhost:{PORT}/index.html?org={org}&token={token}"
         )
 
         httpd.serve_forever()
