@@ -36,9 +36,7 @@ class InfluxDBSink:
         return self.client is not None
 
     def write(self, label, fields):
-        print('storage write')
         if self.client is None:
-            print('self.client is None')
             return
 
         p = Point(label)
