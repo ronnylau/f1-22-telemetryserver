@@ -193,8 +193,7 @@ def main():
                             .tag("host", "host1") \
                             .field("speed", packetdata['car_telemetry_data'][0]['speed']) \
                             .time(datetime.utcnow(), WritePrecision.NS)
-
-                        client.write(bucket, org, point)
+                        write_api.write(bucket, org, point)
 
 
 
