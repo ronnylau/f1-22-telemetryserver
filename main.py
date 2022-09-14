@@ -1,13 +1,11 @@
 import os
-from argparse import ArgumentParser
 
 from session import Gamesession
 
 from packets import *
 from listener import TelemetryListener
 import time
-from storage import InfluxDBSink
-from storage import InfluxDBSinkError
+
 
 def getconfig():
     config = {
@@ -21,7 +19,6 @@ def getconfig():
 lastwrite = 0
 sessionID = None
 session = None
-DEFAULT_BUCKET = "stats"
 
 
 def writefile(racedata, force=0):
@@ -56,53 +53,6 @@ def getEvent(eventStringCode):
 
 
 def main():
-    argp = ArgumentParser(prog="f1-telemetry")
-
-    argp.add_argument(
-        "org",
-        help="InfluxDB Org",
-        type=str,
-    )
-    argp.add_argument(
-        "token",
-        help="InfluxDB Token",
-        type=str,
-    )
-    argp.add_argument(
-        "-b",
-        "--bucket",
-        help="InfluxDB Bucket",
-        type=str,
-        default=DEFAULT_BUCKET,
-    )
-    argp.add_argument(
-        "-r",
-        "--report",
-        help="Generate reports at the end of sessions. Useful for session coordinators",
-        action="store_true",
-    )
-
-    args = argp.parse_args()
-
-    collector = None
-
-    try:
-        with InfluxDBSink(org=args.org, token=args.token, bucket=args.bucket) as sink:
-            if not sink.connected:
-                print(
-                    "WARNING: InfluxDB not available. Telemetry data will not be stored."
-                )
-            else:
-                print("Connected to InfluxDB")
-    except InfluxDBSinkError as e:
-        print("Error:", e)
-
-    except KeyboardInterrupt:
-        if collector is not None:
-            collector.flush()
-        print("\nBOX BOX.")
-    # old code from here
-
     listener = _get_listener()
     global session
     try:
@@ -260,7 +210,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # try to catch the damage data
-                    #session.updateCarDamage(packetdata['car_damage_data'])
+                    session.updateCarDamage(packetdata['car_damage_data'])
                 elif isinstance(packet, PacketSessionHistoryData):
                     # racedata = record.trackLapHistoryData(packet, racedata, carstatus)
                     log.write('\nPacketSessionHistoryData\n')
