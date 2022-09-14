@@ -4,14 +4,8 @@ Basic listener to read the UDP packet and convert it to a known packet format.
 
 import platform
 import socket
-from packets import PacketHeader
-from packets import HEADER_FIELD_TO_PACKET_TYPE
 
-def resolve(packet):
-    header = PacketHeader.from_buffer_copy(packet)
-    key = (header.packet_format, header.packet_version, header.packet_id)
-    return HEADER_FIELD_TO_PACKET_TYPE[key].unpack(packet)
-
+from packets import resolve
 
 
 class PacketListener:

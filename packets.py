@@ -608,6 +608,13 @@ HEADER_FIELD_TO_PACKET_TYPE = {
 
 # [[[end]]]
 
+
+def resolve(packet):
+    header = PacketHeader.from_buffer_copy(packet)
+    key = (header.packet_format, header.packet_version, header.packet_id)
+    return HEADER_FIELD_TO_PACKET_TYPE[key].unpack(packet)
+
+
 class Tyre(Enum):
     RL = 0
     RR = 1
