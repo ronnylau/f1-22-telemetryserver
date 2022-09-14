@@ -224,8 +224,6 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             data = packet.car_telemetry_data[_player_index(packet)].to_dict()
         except IndexError:
             return
-        except Exception as e:
-            print(e)
         print(self)
         data.update(self.motion_data)
         self.motion_data = None
@@ -254,8 +252,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             data = packet.car_status_data[_player_index(packet)]
         except IndexError:
             return
-        except Exception as e:
-            print(e)
+
         self.session.car_status_data(data)
 
         if not self.tyre_data_emitted:
@@ -274,8 +271,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             data = packet.car_damage_data[_player_index(packet)].to_dict()
         except IndexError:
             return
-        except Exception as e:
-            print(e)
+
         for k, v in dict(data).items():
             if isinstance(v, list) and len(v) == len(TYRES):
                 _flatten_tyre_values(data, k)
@@ -322,8 +318,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
 
         except IndexError:
             return
-        except Exception as e:
-            print(e)
+
         self.session.lap_data(data)
 
     def handle_MotionData(self, packet):
@@ -332,8 +327,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             self.motion_data = packet.car_motion_data[_player_index(packet)].to_dict()
         except IndexError:
             return
-        except Exception as e:
-            print(e)
+
     def handle_EventData(self, packet: PacketEventData):
         event = bytes(packet.event_string_code).decode()
         if event == "FLBK":

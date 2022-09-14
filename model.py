@@ -155,8 +155,7 @@ class Session:
                 self.handler.on_sector(self.sector, self.lap, sector_time, best)
 
             return SessionState.ON_TRACK
-        except Exception as e:
-            print(e)
+
         finally:
             self.lap = current_lap
             self.sector = current_sector
