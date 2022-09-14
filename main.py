@@ -2,10 +2,7 @@ from argparse import ArgumentParser
 from threading import Thread
 
 from listener import PacketListener
-
-import live
 from collector import TelemetryCollector
-from server import serve
 from storage import InfluxDBSink
 from storage import InfluxDBSinkError
 
@@ -56,18 +53,10 @@ def main():
             listener = PacketListener()
             collector = TelemetryCollector(listener, sink, args.report)
 
-            server_thread = Thread(target=serve, args=(args.org, args.token))
-            server_thread.daemon = True
-            server_thread.start()
-
             print("Listening for telemetry data ...")
             collector_thread = Thread(target=collector.collect)
             collector_thread.daemon = True
             collector_thread.start()
-
-            print("Starting live data websocket server")
-            # FIXME: Mixing asyncio and threads is yuck!
-            live.serve()
 
     except InfluxDBSinkError as e:
         print("Error:", e)
