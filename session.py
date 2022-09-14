@@ -51,3 +51,6 @@ class Gamesession:
     def updateCarSetups(self, car_setups):
         for index, value in enumerate(self.participants):
             self.participants[index].getCar().updateSetup(car_setups[index])
+    def updateCarDamage(self, car_damage):
+        for index, value in enumerate(self.participants):
+            self.participants[index].getCar().updateDamage(car_damage[index])

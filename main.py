@@ -205,6 +205,9 @@ def main():
                 elif isinstance(packet, PacketCarDamageData):
                     log.write('\nPacketCarDamageData\n')
                     json.dump(packet.to_dict(), log)
+
+                    # try to catch the damage data
+                    session.updateCarDamage(packetdata['car_damage_data'])
                 elif isinstance(packet, PacketSessionHistoryData):
                     # racedata = record.trackLapHistoryData(packet, racedata, carstatus)
                     log.write('\nPacketSessionHistoryData\n')

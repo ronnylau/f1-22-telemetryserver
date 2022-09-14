@@ -1,5 +1,5 @@
 import json
-
+from utils import DictDiffer
 
 class Driver:
     class Car:
@@ -9,12 +9,34 @@ class Driver:
             self.setup = {}
             self.telemetry = None
             self.status = None
-            self.damage = None
+            self.damage = {
+                "tyres_wear": [0.0, 0.0, 0.0, 0.0],
+                "tyres_damage": [0, 0, 0, 0],
+                "brakes_damage": [0, 0, 0, 0],
+                "front_left_wing_damage": 0,
+                "front_right_wing_damage": 0,
+                "rear_wing_damage": 0,
+                "floor_damage": 0,
+                "diffuser_damage": 0,
+                "sidepod_damage": 0,
+                "drs_fault": 0,
+                "gear_box_damage": 0,
+                "engine_damage": 0,
+                "engine_mguhwear": 0,
+                "engine_eswear": 0,
+                "engine_cewear": 0,
+                "engine_icewear": 0,
+                "engine_mgukwear": 0,
+                "engine_tcwear": 0}
             self.laphistory = None
 
         def updateSetup(self, setup):
             for key, value in enumerate(setup):
                 self.setup[value] = setup.get(value)
+
+        def updateDamage(self, damage):
+            diff = DictDiffer(self.damage, damage)
+            print(diff.changed())
 
         def toJSON(self):
             return json.dumps(self, default=lambda o: o.__dict__,
