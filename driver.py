@@ -37,7 +37,7 @@ class Driver:
         def updateDamage(self, damage):
             diff = DictDiffer(self.damage, damage)
             for key, index in enumerate(diff.changed()):
-                self.damage[index] = damage[index]
+                self.damage[key] = damage[key]
 
         def toJSON(self):
             return json.dumps(self, default=lambda o: o.__dict__,
