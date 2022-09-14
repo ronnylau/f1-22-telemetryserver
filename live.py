@@ -35,8 +35,7 @@ async def consume_queue(websocket):
             except asyncio.TimeoutError:
                 await websocket.ping()
                 continue
-            except Exception as e:
-                print(e)
+
             await websocket.send(json.dumps(data))
 
     except websockets.exceptions.ConnectionClosed:
