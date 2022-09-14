@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
+
+@font-face {
+    font-family: 'F1';
+    src: url('art/Formula1-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'F1', 'Titillium Web', sans-serif;
+    background: url("art/bg.jpg") no-repeat center center fixed;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+body ul {
+    overflow: hidden;
+}
+
+.tyre-none {
+    stroke: rgb(105, 105, 105);
+}
+
+.tyre-soft {
+    stroke: rgb(175, 12, 12);
+}
+
+.tyre-medium {
+    stroke: rgb(255, 230, 0);
+}
+
+.tyre-hard {
+    stroke: white;
+}
+
+.tyre-inter {
+    stroke: green;
+}
+
+.tyre-wet {
+    stroke: rgb(21, 44, 148);
+}
+
+.v-line {
+    pointer-events: none;
+}
+
+.plot {
+    padding: 12px;
+}
+
+li .location {
+    font-weight: bold;
+}
+
+li .info {
+    font-size: small;
+    color: lightgray;
+}
+
+#session_list li {
+    padding: 4px;
+}
+
+.highlighted {
+    background-color: purple;
+}
+
+li:hover>div {
+    background-color: rgba(99, 99, 99, 0.3);
+    transition: 0.2s;
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(8px);
+}
+
+.backdrop-darken {
+    backdrop-filter: brightness(20%);
+}
+
+.tyre-label {
+    font-weight: bold;
+    font-size: 48px;
+    font-family: "F1" sans-serif;
+    fill: #fff;
+}

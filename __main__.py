@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from threading import Thread
 
-from listener import PacketListener
+from f1.listener import PacketListener
 
 import live
 from collector import TelemetryCollector
