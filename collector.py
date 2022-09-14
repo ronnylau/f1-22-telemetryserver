@@ -86,10 +86,8 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         self.report = report
         self.drivers = {} if report else None
         self.human_count = HumanCounter() if report else None
-        print(self)
 
     def push(self, fields: t.Dict[str, t.Any]):
-        print('push')
         print(fields)
         current_time = self.session.time
         if (
@@ -113,28 +111,22 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             print(data)
 
     def flush(self):
-        print('flush')
         while self.queue:
             _, lap, data = self.queue.popleft()
             self.sink.write(f"{self.session.slug}|{lap:002}", data)
-            print(data)
 
     def push_live(self, _type: str, data: t.Dict[str, t.Any]):
-        print('push_live')
         if self.session is None:
-            print('self.session is None')
             return
 
         live_data = {"type": _type, "data": data}
         if live_data == self.last_live_data.get(_type, None):
-            print('live_data == self.last_live_data.get(_type, None)')
             return
 
         if enqueue({"type": _type, "data": data}):
             self.last_live_data[_type] = live_data
 
     def collect(self):
-        print('collect')
         return self.handle()
 
     # ---- SessionEventHandler ----
@@ -195,9 +187,7 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
     # ---- PacketHandler ----
 
     def handle_SessionData(self, packet):
-        print('handle_SessionData')
         self.session.refresh(packet)
-        print(self)
         self.push_live(
             "weather_data",
             {
@@ -226,7 +216,6 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             return
         except Exception as e:
             print(e)
-        print(self)
         data.update(self.motion_data)
         self.motion_data = None
 
