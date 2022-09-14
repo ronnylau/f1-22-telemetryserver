@@ -121,10 +121,12 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
     def push_live(self, _type: str, data: t.Dict[str, t.Any]):
         print('push_live')
         if self.session is None:
+            print('self.session is None')
             return
 
         live_data = {"type": _type, "data": data}
         if live_data == self.last_live_data.get(_type, None):
+            print('live_data == self.last_live_data.get(_type, None)')
             return
 
         if enqueue({"type": _type, "data": data}):
