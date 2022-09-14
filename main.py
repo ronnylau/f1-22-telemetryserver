@@ -191,7 +191,7 @@ def main():
                     with InfluxDBClient(url="http://85.14.247.158:8086", token=token, org=org) as client:
                         point = Point("mem") \
                             .tag("host", "host1") \
-                            .field("speed", packetdata['car_telemetry_data']['0']['speed']) \
+                            .field("speed", packetdata['car_telemetry_data'][0]['speed']) \
                             .time(datetime.utcnow(), WritePrecision.NS)
 
                         client.write(bucket, org, point)
