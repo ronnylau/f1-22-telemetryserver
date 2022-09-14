@@ -3,7 +3,7 @@ import typing as t
 from collections import Counter
 from datetime import timedelta
 
-from f1.packets import FinalClassificationData
+from packets import FinalClassificationData
 
 
 class HumanCounter(Counter):
