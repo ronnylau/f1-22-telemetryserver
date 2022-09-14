@@ -18,6 +18,5 @@ class PacketHandler:
             handler = getattr(self, f"handle_{name}", None)
             print(name)
             print(handler)
-            # if handler is not None:
-            #    handler(packet)
-            handler(packet)
+            if handler is not None:
+                handler(packet)

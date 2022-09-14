@@ -609,7 +609,6 @@ HEADER_FIELD_TO_PACKET_TYPE = {
 def resolve(packet):
     header = PacketHeader.from_buffer_copy(packet)
     key = (header.packet_format, header.packet_version, header.packet_id)
-    print(key)
     return HEADER_FIELD_TO_PACKET_TYPE[key].unpack(packet)
 
 
