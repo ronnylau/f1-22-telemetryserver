@@ -11,7 +11,7 @@ class InfluxDBSinkError(Exception):
 
 
 class InfluxDBSink:
-    def __init__(self, org, token, bucket, url="http://85.14.247.158:8086"):
+    def __init__(self, org, token, bucket, url="http://localhost:8086"):
         self.client = InfluxDBClient(url=url, token=token, org=org, debug=False)
         try:
             self.client.ready()
