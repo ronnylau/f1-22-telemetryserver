@@ -2,23 +2,23 @@ import typing as t
 from bisect import bisect_left
 from collections import deque
 
-from handler import PacketHandler
-from packets import TYRES
-from packets import Packet
-from packets import PacketCarTelemetryData
-from packets import PacketEventData
-from packets import PacketFinalClassificationData
-from packets import PacketLapData
-from packets import PacketParticipantsData
-from packets import PacketSessionData
+from f1.handler import PacketHandler
+from f1.packets import TYRES
+from f1.packets import Packet
+from f1.packets import PacketCarTelemetryData
+from f1.packets import PacketEventData
+from f1.packets import PacketFinalClassificationData
+from f1.packets import PacketLapData
+from f1.packets import PacketParticipantsData
+from f1.packets import PacketSessionData
 
-from live import enqueue
-from model import Session
-from model import SessionEventHandler
-from report import HumanCounter
-from report import QualifyingReport
-from report import RaceReport
-from view import SessionPrinter
+from f1_telemetry.live import enqueue
+from f1_telemetry.model import Session
+from f1_telemetry.model import SessionEventHandler
+from f1_telemetry.report import HumanCounter
+from f1_telemetry.report import QualifyingReport
+from f1_telemetry.report import RaceReport
+from f1_telemetry.view import SessionPrinter
 
 
 def closest(values, value):
@@ -107,13 +107,11 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
                 break
             self.queue.popleft()
             self.sink.write(f"{self.session.slug}|{lap:002}", data)
-            print(data)
 
     def flush(self):
         while self.queue:
             _, lap, data = self.queue.popleft()
             self.sink.write(f"{self.session.slug}|{lap:002}", data)
-            print(data)
 
     def push_live(self, _type: str, data: t.Dict[str, t.Any]):
         if self.session is None:
