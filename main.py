@@ -157,7 +157,7 @@ def main():
                     # check if the session exist
                     if session and isinstance(session, Gamesession):
                         # if we have all participants already, skip the packet
-                        if len(session.getparticipants()) > 0:
+                        if session.getparticipants().hasparticipants():
                             continue
                         # update participants
                         session.getparticipants().update(packetdata['participants'])
@@ -169,7 +169,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # if we have all participants already, skip the packet
-                    if not session or len(session.getparticipants()) == 0:
+                    if not session or not session.getparticipants().hasparticipants():
                         print('keine teilnehmer vorhanden, continue')
                         continue
                     # try to catch the setup data
@@ -190,10 +190,10 @@ def main():
                         result.write(str(session))
                         result.write('\nDrivers:\n')
                         # list all priticipants
-                        if len(session.getparticipants()) > 0:
+                        if session.getparticipants().hasparticipants():
                             participantList = session.getparticipants()
-                            for key, driver in enumerate(participantList):
-                                participant = participantList[key]
+                            for key, driver in enumerate(participantList.participants):
+                                participant = participantList.participants[key]
                                 result.write(str(participant) + '\n')
                                 result.write('\t\t' + str(participant.getCar().setup) + '\n')
                     log.write('\nPacketFinalClassificationData\n')
