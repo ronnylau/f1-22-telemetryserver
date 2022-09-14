@@ -4,8 +4,6 @@ Basic listener to read the UDP packet and convert it to a known packet format.
 
 import platform
 import socket
-import ctypes
-from enum import Enum
 
 
 def resolve(packet):
@@ -26,7 +24,7 @@ class PacketListener:
             try:
                 return resolve(self.socket.recv(2048))
             except socket.timeout:
-                print("Error")
+                pass
 
     def __iter__(self):
         while True:
@@ -37,6 +35,12 @@ class PacketListener:
 Spec taken from:
 https://answers.ea.com/t5/General-Discussion/F1-22-UDP-Specification/m-p/11551274
 """
+
+import ctypes
+from enum import Enum
+from listener import PacketListener
+
+
 class PacketMixin(object):
     """A base set of helper methods for ctypes based packets"""
 
