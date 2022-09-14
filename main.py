@@ -7,6 +7,11 @@ from listener import TelemetryListener
 import time
 
 
+from datetime import datetime
+
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
+
 def getconfig():
     config = {
         'path': '.',
@@ -178,6 +183,21 @@ def main():
                     log.write('\nPacketCarTelemetryData\n')
                     json.dump(packet.to_dict(), log)
                     print('PacketCarTelemetryData')
+                    # You can generate an API token from the "API Tokens Tab" in the UI
+                    token = "1aexZjvrnGkDNrq4pEk_uUeesPc58Assz_0D6QXHEk1VqeT2Eb1BlOFUVzZ1VUVqCeglZwxzZ9OOMi3Z4vd-cg=="
+                    org = "F1O"
+                    bucket = "f1-telemetry"
+
+                    with InfluxDBClient(url="http://85.14.247.158:8086", token=token, org=org) as client:
+                        point = Point("mem") \
+                            .tag("host", "host1") \
+                            .field("speed", packetdata['car_telemetry_data']['0']['speed']) \
+                            .time(datetime.utcnow(), WritePrecision.NS)
+
+                        client.write(bucket, org, point)
+
+
+
                 elif isinstance(packet, PacketCarStatusData):
                     carstatus = packet
 
