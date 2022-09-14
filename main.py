@@ -76,6 +76,8 @@ def main():
         if collector is not None:
             collector.flush()
         print("\nBOX BOX.")
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
