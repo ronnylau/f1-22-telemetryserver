@@ -17,8 +17,10 @@ class InfluxDBSink:
             self.client.ready()
             self._write_api = self.client.write_api(write_options=SYNCHRONOUS)
             self.bucket = bucket
-        except:
-            self.client = None
+        except Exception as e:
+            print(e)
+        # except:
+        #    self.client = None
 
     def __enter__(self):
         if self.client is not None:

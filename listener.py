@@ -21,6 +21,8 @@ class PacketListener:
                 return resolve(self.socket.recv(2048))
             except socket.timeout:
                 pass
+            except Exception as e:
+                print(e)
 
     def __iter__(self):
         while True:
