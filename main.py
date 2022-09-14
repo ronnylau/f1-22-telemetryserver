@@ -73,8 +73,7 @@ def main():
                     continue
 
                 if isinstance(packet, PacketMotionData):
-                    # skip motion packets
-                    pass
+                    print('MotinPaket')
                 elif isinstance(packet, PacketSessionData):
                     log.write('\nPacketSessionData\n')
                     json.dump(packet.to_dict(), log)
@@ -178,6 +177,7 @@ def main():
                 elif isinstance(packet, PacketCarTelemetryData):
                     log.write('\nPacketCarTelemetryData\n')
                     json.dump(packet.to_dict(), log)
+                    print('PacketCarTelemetryData')
                 elif isinstance(packet, PacketCarStatusData):
                     carstatus = packet
 
