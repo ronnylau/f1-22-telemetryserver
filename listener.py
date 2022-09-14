@@ -15,7 +15,7 @@ def resolve(packet):
 
 
 class PacketListener:
-    def __init__(self, host: str = "", port: int = 20777):
+    def __init__(self, host: str = "localhost", port: int = 20777):
         self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
         if platform.system() == "Windows":
             self.socket.settimeout(0.5)
