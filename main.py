@@ -191,10 +191,10 @@ def main():
                         result.write(str(session))
                         result.write('\nDrivers:\n')
                         # list all priticipants
-                        if session.getparticipants().hasparticipants():
+                        if len(session.getparticipants()) > 0:
                             participantList = session.getparticipants()
-                            for key, driver in enumerate(participantList.participants):
-                                participant = participantList.participants[key]
+                            for key, driver in enumerate(participantList):
+                                participant = participantList[key]
                                 result.write(str(participant) + '\n')
                                 result.write('\t\t' + str(participant.getCar().setup) + '\n')
                     log.write('\nPacketFinalClassificationData\n')
