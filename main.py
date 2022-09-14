@@ -191,6 +191,8 @@ def main():
                     IC = InfluxClient(token, org, bucket)
                     rows = []
                     data = f"speed,host=host1 speed={packetdata['car_telemetry_data'][0]['speed']}"
+                    data += f"throttle,host=host1 throttle={packetdata['car_telemetry_data'][0]['throttle']}"
+                    data += f"brake,host=host1 brake={packetdata['car_telemetry_data'][0]['brake']}"
                     rows.append(data)
 
                     IC.write_data(rows)
