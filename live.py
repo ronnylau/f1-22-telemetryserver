@@ -49,7 +49,7 @@ async def consume_queue(websocket):
 
 
 async def _serve():
-    async with websockets.serve(consume_queue, "localhost", 20775):
+    async with websockets.serve(consume_queue, "85.14.247.158", 20775):
         await asyncio.Future()  # run forever
 
 
