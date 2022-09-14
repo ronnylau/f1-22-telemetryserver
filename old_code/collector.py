@@ -2,7 +2,7 @@ import typing as t
 from bisect import bisect_left
 from collections import deque
 
-from handler import PacketHandler
+from packets import PacketHandler
 from packets import TYRES
 from packets import Packet
 from packets import PacketCarTelemetryData
@@ -12,6 +12,7 @@ from packets import PacketLapData
 from packets import PacketParticipantsData
 from packets import PacketSessionData
 
+# from f1_telemetry.live import enqueue
 from model import Session
 from model import SessionEventHandler
 from report import HumanCounter

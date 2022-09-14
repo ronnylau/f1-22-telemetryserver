@@ -1,12 +1,42 @@
 """
-Spec taken from:
-https://answers.ea.com/t5/General-Discussion/F1-22-UDP-Specification/m-p/11551274
+Basic listener to read the UDP packet and convert it to a known packet format.
 """
 
+import platform
+import socket
 import ctypes
 from enum import Enum
 
 
+def resolve(packet):
+    header = PacketHeader.from_buffer_copy(packet)
+    key = (header.packet_format, header.packet_version, header.packet_id)
+    return HEADER_FIELD_TO_PACKET_TYPE[key].unpack(packet)
+
+
+class PacketListener:
+    def __init__(self, host: str = "localhost", port: int = 20777):
+        self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+        if platform.system() == "Windows":
+            self.socket.settimeout(0.5)
+        self.socket.bind((host, port))
+
+    def get(self):
+        while True:
+            try:
+                return resolve(self.socket.recv(2048))
+            except socket.timeout:
+                print("Error")
+
+    def __iter__(self):
+        while True:
+            yield self.get()
+
+
+"""
+Spec taken from:
+https://answers.ea.com/t5/General-Discussion/F1-22-UDP-Specification/m-p/11551274
+"""
 class PacketMixin(object):
     """A base set of helper methods for ctypes based packets"""
 
@@ -603,14 +633,9 @@ HEADER_FIELD_TO_PACKET_TYPE = {
     (2022, 1, 10): PacketCarDamageData,
     (2022, 1, 11): PacketSessionHistoryData,
 }
+
+
 # [[[end]]]
-
-
-def resolve(packet):
-    header = PacketHeader.from_buffer_copy(packet)
-    key = (header.packet_format, header.packet_version, header.packet_id)
-    return HEADER_FIELD_TO_PACKET_TYPE[key].unpack(packet)
-
 
 class Tyre(Enum):
     RL = 0
@@ -654,3 +679,22 @@ TRACKS = {
     29: "Jeddah",
     30: "Miami",
 }
+
+
+class PacketHandler:
+    def __init__(self, listener: PacketListener):
+        self.listener = listener
+
+    def handle_generic(self, packet):
+        pass
+
+    def handle(self):
+        for packet in self.listener:
+            self.handle_generic(packet)
+
+            name = packet.__class__.__name__
+            if name.startswith("Packet"):
+                name = name[6:]
+            handler = getattr(self, f"handle_{name}", None)
+            if handler is not None:
+                handler(packet)
