@@ -86,8 +86,10 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         self.report = report
         self.drivers = {} if report else None
         self.human_count = HumanCounter() if report else None
+        print(self)
 
     def push(self, fields: t.Dict[str, t.Any]):
+        print('push')
         current_time = self.session.time
         if (
             self.session is None
@@ -110,12 +112,14 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
             print(data)
 
     def flush(self):
+        print('flush')
         while self.queue:
             _, lap, data = self.queue.popleft()
             self.sink.write(f"{self.session.slug}|{lap:002}", data)
             print(data)
 
     def push_live(self, _type: str, data: t.Dict[str, t.Any]):
+        print('push_live')
         if self.session is None:
             return
 
@@ -209,14 +213,14 @@ class TelemetryCollector(PacketHandler, SessionEventHandler):
         )
 
     def handle_CarTelemetryData(self, packet: PacketCarTelemetryData):
-        if self.motion_data is None:
-            return
-
+        # if self.motion_data is None:
+        #    return
+        #
         try:
             data = packet.car_telemetry_data[_player_index(packet)].to_dict()
         except IndexError:
             return
-
+        print(self)
         data.update(self.motion_data)
         self.motion_data = None
 
