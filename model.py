@@ -4,10 +4,10 @@ from abc import abstractmethod
 from datetime import datetime
 from enum import Enum
 
-from f1.packets import TRACKS
-from f1.packets import CarStatusData
-from f1.packets import LapData
-from f1.packets import PacketSessionData
+from packets import TRACKS
+from packets import CarStatusData
+from packets import LapData
+from packets import PacketSessionData
 
 
 class SessionState(Enum):
