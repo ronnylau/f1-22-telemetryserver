@@ -1,13 +1,16 @@
 import os
 from argparse import ArgumentParser
+from threading import Thread
 
 from session import Gamesession
 
 from packets import *
-from listener import TelemetryListener
+from listener import TelemetryListener, PacketListener
 import time
 from storage import InfluxDBSink
 from storage import InfluxDBSinkError
+from collector import TelemetryCollector
+
 
 def getconfig():
     config = {
@@ -38,16 +41,6 @@ def writefile(racedata, force=0):
             f.write(to_json(racedata))
         print('Job done!')
         lastwrite = time.time()
-
-
-def _get_listener():
-    try:
-        print('Starting listener on localhost:20777')
-        return TelemetryListener()
-    except OSError as exception:
-        print(f'Unable to setup connection: {exception.args[1]}')
-        print('Failed to open connector, stopping.')
-        exit(127)
 
 
 def getEvent(eventStringCode):
@@ -94,6 +87,15 @@ def main():
                 )
             else:
                 print("Connected to InfluxDB")
+
+            listener = PacketListener()
+            collector = TelemetryCollector(listener, sink, args.report)
+
+            print("Listening for telemetry data ...")
+            collector_thread = Thread(target=collector.collect)
+            collector_thread.daemon = True
+            collector_thread.start()
+
     except InfluxDBSinkError as e:
         print("Error:", e)
 
@@ -101,9 +103,10 @@ def main():
         if collector is not None:
             collector.flush()
         print("\nBOX BOX.")
+
     # old code from here
 
-    listener = _get_listener()
+    """listener = _get_listener()
     global session
     try:
         racedata = {
@@ -246,9 +249,9 @@ def main():
                             for key, driver in enumerate(participantList):
                                 participant = participantList[key]
                                 result.write(str(participant) + '\n')
-                                #write setup
+                                # write setup
                                 result.write('\t\t' + str(participant.getCar().setup) + '\n')
-                                #write damage
+                                # write damage
                                 result.write('\t\t' + str(participant.getCar().damage) + '\n')
                     log.write('\nPacketFinalClassificationData\n')
                     json.dump(packet.to_dict(), log)
@@ -260,7 +263,7 @@ def main():
                     json.dump(packet.to_dict(), log)
 
                     # try to catch the damage data
-                    #session.updateCarDamage(packetdata['car_damage_data'])
+                    # session.updateCarDamage(packetdata['car_damage_data'])
                 elif isinstance(packet, PacketSessionHistoryData):
                     # racedata = record.trackLapHistoryData(packet, racedata, carstatus)
                     log.write('\nPacketSessionHistoryData\n')
@@ -269,7 +272,7 @@ def main():
         print('Stop the car, stop the car Checo.')
         print('Stop the car, stop at pit exit.')
         print('Just pull over to the side.')
-
+    """
 
 if __name__ == '__main__':
     main()
